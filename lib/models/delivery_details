@@ -1,0 +1,17 @@
+class DeliveryDetails {
+  final int merchantId;
+  final double fee;
+  final double merchantFee;
+
+  DeliveryDetails({
+    required this.merchantId,
+    required this.fee,
+    required this.merchantFee,
+  });
+
+  Map<String, dynamic> toJson() => {
+    "merchant_id": merchantId,
+    "fee": fee,
+    "merchant_fee": merchantFee,
+  };
+}
