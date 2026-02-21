@@ -24,9 +24,9 @@ abstract class BaseAppApi {
 
   Future<bool> deliverySettings({
     required String merchantId,
-    required double order_total_amount,
-    required bool is_cod,
-    double nomnom_coins = 0,
+    required double orderTotalAmount,
+    required bool isCOd,
+    double nomnomCoins = 0,
     String promocode = "",
   });
 
