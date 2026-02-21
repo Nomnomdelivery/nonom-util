@@ -110,16 +110,17 @@ class CartMenuListingState extends ConsumerState<CartMenuListing>
   late DeliveryType selectedDeliveryType = deliveryType.first;
   StreamSubscription? _riderSubscription;
   final List<DeliveryType> deliveryType = [
-    DeliveryType(
-      id: 1,
-      photoPath: "packages/nomnom_util/assets/images/food_delivery.png",
-      title: "Food Delivery",
-    ),
-    DeliveryType(
-      id: 2,
-      photoPath: "packages/nomnom_util/assets/images/food_pick-up.png",
-      title: "Food Pick-up",
-    ),
+    //TODO: fix image
+    // DeliveryType(
+    //   id: 1,
+    //   photoPath: "packages/nomnom_util/assets/images/food_delivery.png",
+    //   title: "Food Delivery",
+    // ),
+    // DeliveryType(
+    //   id: 2,
+    //   photoPath: "packages/nomnom_util/assets/images/food_pick-up.png",
+    //   title: "Food Pick-up",
+    // ),
   ];
   final DateFormat format = DateFormat('MMM. dd');
   DateTime deliveryDate = DateTime.now().toLocal();
@@ -1698,12 +1699,12 @@ class CartMenuListingState extends ConsumerState<CartMenuListing>
                                 child: Row(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
-                                    ImageIcon(
-                                      AssetImage(
-                                        "packages/nomnom_util/assets/icons/promo.png",
-                                      ),
-                                      color: orangePalette,
-                                    ),
+                                    // ImageIcon(
+                                    //   AssetImage(
+                                    //     "packages/nomnom_util/assets/icons/promo.png",
+                                    //   ),
+                                    //   color: orangePalette,
+                                    // ),
                                     const Gap(10),
                                     Text(
                                       "Promo code",

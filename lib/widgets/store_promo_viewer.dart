@@ -37,10 +37,11 @@ class _StorePromoViewerState extends ConsumerState<StorePromoViewer> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    "packages/nomnom_util/assets/images/rider.png",
-                    height: 120,
-                  ),
+                  //TODO: fix image
+                  // Image.asset(
+                  //   "packages/nomnom_util/assets/images/rider.png",
+                  //   height: 120,
+                  // ),
                   const Gap(20),
                   Text("No promos generated yet."),
                 ],

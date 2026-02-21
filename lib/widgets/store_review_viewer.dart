@@ -91,8 +91,9 @@ class _StoreReviewViewerState extends ConsumerState<StoreReviewViewer>
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Image.asset(
-                            "packages/nomnom_util/assets/images/rider.png",
+                            "assets/images/rider.png",
                             height: 120,
+                            package: 'nomnom_util',
                           ),
                           const Gap(10),
                           Text("No reviews yet."),

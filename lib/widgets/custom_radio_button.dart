@@ -38,14 +38,14 @@ class _CustomRadioButtonState extends State<CustomRadioButton>
       onTap: () async {
         if (!widget.enabled) {
           if (widget.disabledMessage == null) return;
-          await Fluttertoast.showToast(
-            msg: widget.disabledMessage!,
-            toastLength: Toast.LENGTH_LONG,
-            gravity: ToastGravity.CENTER,
-            backgroundColor: ColorPalette.orange,
-            fontSize: 18,
-            fontAsset: "assets/font/Poppins/Poppins-SemiBold.ttf",
-          );
+          // await Fluttertoast.showToast(
+          //   msg: widget.disabledMessage!,
+          //   toastLength: Toast.LENGTH_LONG,
+          //   gravity: ToastGravity.CENTER,
+          //   backgroundColor: ColorPalette.orange,
+          //   fontSize: 18,
+          //   fontAsset: "assets/font/Poppins/Poppins-SemiBold.ttf",
+          // );
           return;
         }
         setState(() {

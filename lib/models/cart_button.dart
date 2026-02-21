@@ -55,37 +55,38 @@ class CartButton extends StatelessWidget with ColorPalette {
             .fold(0, (sum, count) => sum + count);
         Widget iconWidget;
         if (isFilled) {
-          iconWidget = itemCount > 0
-              ? Badge.count(
-                  count: itemCount,
-                  backgroundColor: Colors.white,
-                  textStyle: _style,
-                  textColor: orangePalette,
-                  child: Image.asset(
-                    "packages/nomnom_util/assets/icons/new_bag.png",
-                    width: 25,
-                  ),
-                )
-              : Image.asset(
-                  "packages/nomnom_util/assets/icons/new_bag.png",
-                  width: 25,
-                );
+          //TODO: image
+          // iconWidget = itemCount > 0
+          //     ? Badge.count(
+          //         count: itemCount,
+          //         backgroundColor: Colors.white,
+          //         textStyle: _style,
+          //         textColor: orangePalette,
+          //         child: Image.asset(
+          //           "packages/nomnom_util/assets/icons/new_bag.png",
+          //           width: 25,
+          //         ),
+          //       )
+          //     : Image.asset(
+          //         "packages/nomnom_util/assets/icons/new_bag.png",
+          //         width: 25,
+          //       );
         } else {
-          iconWidget = itemCount > 0
-              ? Badge.count(
-                  backgroundColor: badgeColor ?? mainColor,
-                  count: itemCount,
-                  textColor: textColor,
-                  textStyle: _style,
-                  child: ImageIcon(
-                    AssetImage("packages/nomnom_util/assets/icons/bag.png"),
-                    color: mainColor,
-                  ),
-                )
-              : ImageIcon(
-                  AssetImage("packages/nomnom_util/assets/icons/bag.png"),
-                  color: mainColor,
-                );
+          // iconWidget = itemCount > 0
+          //     ? Badge.count(
+          //         backgroundColor: badgeColor ?? mainColor,
+          //         count: itemCount,
+          //         textColor: textColor,
+          //         textStyle: _style,
+          //         child: ImageIcon(
+          //           AssetImage("packages/nomnom_util/assets/icons/bag.png"),
+          //           color: mainColor,
+          //         ),
+          //       )
+          //     : ImageIcon(
+          //         AssetImage("packages/nomnom_util/assets/icons/bag.png"),
+          //         color: mainColor,
+          //       );
         }
         return IconButton(
           onPressed: () async {
@@ -103,7 +104,7 @@ class CartButton extends StatelessWidget with ColorPalette {
                   )
                 : null,
             padding: const EdgeInsets.all(8),
-            child: iconWidget,
+            // child: iconWidget,
           ),
         );
       },

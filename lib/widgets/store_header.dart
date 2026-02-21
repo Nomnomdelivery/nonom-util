@@ -54,24 +54,25 @@ class StoreHeader extends StatelessWidget {
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Hero(
-                      tag: "${model.id}${model.photoUrl}",
-                      child: ClipRRect(
-                        borderRadius: BorderRadius.circular(10),
-                        child: CachedNetworkImage(
-                          imageUrl: model.photoUrl,
-                          width: 80,
-                          height: 80,
-                          fit: BoxFit.cover,
-                          errorWidget: (context, url, error) => Image.asset(
-                            'packages/nomnom_util/assets/images/customer.jpg',
-                            width: 80,
-                            height: 80,
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ),
-                    ),
+                    //TODO: fix image
+                    // Hero(
+                    //   tag: "${model.id}${model.photoUrl}",
+                    //   child: ClipRRect(
+                    //     borderRadius: BorderRadius.circular(10),
+                    //     child: CachedNetworkImage(
+                    //       imageUrl: model.photoUrl,
+                    //       width: 80,
+                    //       height: 80,
+                    //       fit: BoxFit.cover,
+                    //       errorWidget: (context, url, error) => Image.asset(
+                    //         'packages/nomnom_util/assets/images/customer.jpg',
+                    //         width: 80,
+                    //         height: 80,
+                    //         fit: BoxFit.cover,
+                    //       ),
+                    //     ),
+                    //   ),
+                    // ),
                     const Gap(15),
                     Expanded(
                       child: LayoutBuilder(

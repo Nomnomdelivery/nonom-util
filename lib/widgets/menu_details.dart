@@ -584,11 +584,12 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                           ? widget.item.photoUrl
                                           : selectedVariant!.photoUrl,
                                       fit: BoxFit.cover,
-                                      errorWidget: (context, url, error) =>
-                                          Image.asset(
-                                            'packages/nomnom_util/assets/images/customer.jpg',
-                                            fit: BoxFit.cover,
-                                          ),
+                                      //TODO: fix image
+                                      // errorWidget: (context, url, error) =>
+                                      //     Image.asset(
+                                      //       'packages/nomnom_util/assets/images/customer.jpg',
+                                      //       fit: BoxFit.cover,
+                                      //     ),
                                     ),
                                   ),
                                 )

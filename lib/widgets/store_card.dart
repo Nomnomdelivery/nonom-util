@@ -205,19 +205,19 @@ class _StoreCardState extends State<StoreCard> with ColorPalette {
     return _cachedFontSize!;
   }
 
-  static const Widget _imageFallback = Image(
-    image: AssetImage('packages/nomnom_util/assets/images/customer.jpg'),
-    height: 70,
-    width: 70,
-    fit: BoxFit.fill,
-  );
+  // static const Widget _imageFallback = Image(
+  //   image: AssetImage('packages/nomnom_util/assets/images/customer.jpg'),
+  //   height: 70,
+  //   width: 70,
+  //   fit: BoxFit.fill,
+  // );
 
-  static const Widget _imageFallback80 = Image(
-    image: AssetImage('packages/nomnom_util/assets/images/customer.jpg'),
-    height: 80,
-    width: 80,
-    fit: BoxFit.fill,
-  );
+  // static const Widget _imageFallback80 = Image(
+  //   image: AssetImage('packages/nomnom_util/assets/images/customer.jpg'),
+  //   height: 80,
+  //   width: 80,
+  //   fit: BoxFit.fill,
+  // );
 
   Widget _buildListLayout(BoxConstraints cc) {
     return Column(
@@ -271,7 +271,8 @@ class _StoreCardState extends State<StoreCard> with ColorPalette {
                       fadeOutDuration: Duration.zero,
                       placeholder: (_, _) =>
                           const _ImageShimmer(width: 70, height: 70),
-                      errorWidget: (_, _, _) => _imageFallback, // static const
+                      //TODO: fix image
+                      // errorWidget: (_, _, _) => _imageFallback, // static const
                     ),
                   ),
                 ),
@@ -354,7 +355,8 @@ class _StoreCardState extends State<StoreCard> with ColorPalette {
                     fadeOutDuration: Duration.zero,
                     placeholder: (_, _) =>
                         const _ImageShimmer(width: 80, height: 80),
-                    errorWidget: (_, _, _) => _imageFallback80, // static const
+                    //TODO: fix image
+                    // errorWidget: (_, _, _) => _imageFallback80, // static const
                   ),
                 ),
               ),

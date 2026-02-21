@@ -32,10 +32,11 @@ class BuildSearchByStore extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Image.asset(
-                      "packages/nomnom_util/assets/images/rider.png",
-                      height: 100,
-                    ),
+                    //TODO: fix image
+                    // Image.asset(
+                    //   "packages/nomnom_util/assets/images/rider.png",
+                    //   height: 100,
+                    // ),
                     const Gap(20),
                     Text("No result found"),
                   ],

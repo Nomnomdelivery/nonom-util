@@ -281,10 +281,11 @@ class _MerchantPromoCodesState extends ConsumerState<MerchantPromoCodes>
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset(
-                          "packages/nomnom_util/assets/images/rider.png",
-                          height: 120,
-                        ),
+                        //TODO: fix image
+                        // Image.asset(
+                        //   "packages/nomnom_util/assets/images/rider.png",
+                        //   height: 120,
+                        // ),
                         const Gap(20),
                         Text("No promos generated yet."),
                       ],
@@ -359,24 +360,25 @@ class _MerchantPromoCodesState extends ConsumerState<MerchantPromoCodes>
                                   children: [
                                     Stack(
                                       children: [
-                                        ClipRRect(
-                                          borderRadius: BorderRadius.only(
-                                            topLeft: Radius.circular(8),
-                                            bottomLeft: Radius.circular(8),
-                                          ),
-                                          child: SizedBox(
-                                            width: 120,
-                                            child: Image.asset(
-                                              promo.promoType == 1
-                                                  ? "packages/nomnom_util/assets/images/delivery.jpg"
-                                                  : promo.promoType == 2
-                                                  ? "packages/nomnom_util/assets/images/price.jpg"
-                                                  : "packages/nomnom_util/assets/images/delivery_price.jpg",
-                                              fit: BoxFit.cover,
-                                              width: 120,
-                                            ),
-                                          ),
-                                        ),
+                                        //TODO: fix image
+                                        // ClipRRect(
+                                        //   borderRadius: BorderRadius.only(
+                                        //     topLeft: Radius.circular(8),
+                                        //     bottomLeft: Radius.circular(8),
+                                        //   ),
+                                        //   child: SizedBox(
+                                        //     width: 120,
+                                        //     child: Image.asset(
+                                        //       promo.promoType == 1
+                                        //           ? "packages/nomnom_util/assets/images/delivery.jpg"
+                                        //           : promo.promoType == 2
+                                        //           ? "packages/nomnom_util/assets/images/price.jpg"
+                                        //           : "packages/nomnom_util/assets/images/delivery_price.jpg",
+                                        //       fit: BoxFit.cover,
+                                        //       width: 120,
+                                        //     ),
+                                        //   ),
+                                        // ),
                                         // Ticket edge notches
                                         Positioned(
                                           right: -6,
