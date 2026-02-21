@@ -8,7 +8,7 @@ import 'package:nomnom_util/api/app_abstract.dart';
 import 'package:nomnom_util/api/cart_api.dart';
 import 'package:nomnom_util/api/data_cacher.dart';
 import 'package:nomnom_util/api/firebase_firestore_support.dart';
-import 'package:nomnom_util/api/store_api.dart';
+import 'package:nomnom_util/api/base_store_api.dart';
 import 'package:nomnom_util/extensions/color_ext.dart';
 import 'package:nomnom_util/extensions/num_currency_format.dart';
 import 'package:nomnom_util/extensions/string_capitalize.dart';
@@ -44,7 +44,7 @@ class PopularCard extends StatelessWidget with ColorPalette {
   final DateTime? preorderDateTime;
   final String placeholderImage;
   final StateProvider<AreaSetting?> areaSettingsProvider;
-  final StoreApi api;
+  final BaseStoreApi api;
   final StateNotifierProvider<CurrentUserCartNotifier, List<CartModel>>
   currentUserCartProvider;
   final CartApi cartApi;

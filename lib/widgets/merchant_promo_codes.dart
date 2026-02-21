@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
-import 'package:nomnom_util/api/store_api.dart';
+import 'package:nomnom_util/api/base_store_api.dart';
 import 'package:nomnom_util/extensions/list_ext.dart';
 import 'package:nomnom_util/extensions/string_capitalize.dart';
 import 'package:nomnom_util/models/categorized_promo.dart';
@@ -28,7 +28,7 @@ class MerchantPromoCodes extends ConsumerStatefulWidget {
   final Future<bool> Function(PromoModel) onPromoSelected;
   final PromoModel? selectedPromo;
   final bool isValidPromo;
-  final StoreApi api;
+  final BaseStoreApi api;
   final StateNotifierProvider<CurrentLocationNotifier, UserAddress?>
   currentLocationProvider;
 

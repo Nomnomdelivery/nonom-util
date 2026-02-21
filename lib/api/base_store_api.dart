@@ -8,7 +8,7 @@ import 'package:nomnom_util/models/merchant/merchant_with_city.dart';
 import 'package:nomnom_util/models/promo.dart';
 import 'package:nomnom_util/models/store_feedback.dart';
 
-abstract class StoreApi {
+abstract class BaseStoreApi {
   Future<int?> getStoreCount();
 
   Future<MerchantDetails> publicDetails(int id);

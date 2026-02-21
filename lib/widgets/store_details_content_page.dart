@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_animate/flutter_animate.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:nomnom_util/api/store_api.dart';
+import 'package:nomnom_util/api/base_store_api.dart';
 import 'package:nomnom_util/extensions/string_capitalize.dart';
 import 'package:nomnom_util/extensions/string_parser.dart';
 import 'package:nomnom_util/models/area_setting.dart';
@@ -36,7 +36,7 @@ class StoreDetailsContentPage extends ConsumerStatefulWidget {
   final FutureProvider<List<PromoModel>> promoProvider;
   final VoidCallback changePage;
   final StateProvider<AreaSetting?> areaSettingsProvider;
-  final StoreApi api;
+  final BaseStoreApi api;
   final StateNotifierProvider<CurrentUserNotifier, UserModel?>
   currentUserProvider;
   @override

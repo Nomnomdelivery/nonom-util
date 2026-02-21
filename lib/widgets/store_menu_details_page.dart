@@ -5,7 +5,7 @@ import 'package:nomnom_util/api/app_abstract.dart';
 import 'package:nomnom_util/api/cart_api.dart';
 import 'package:nomnom_util/api/data_cacher.dart';
 import 'package:nomnom_util/api/firebase_firestore_support.dart';
-import 'package:nomnom_util/api/store_api.dart';
+import 'package:nomnom_util/api/base_store_api.dart';
 import 'package:nomnom_util/extensions/color_ext.dart';
 import 'package:nomnom_util/extensions/color_opacity.dart';
 import 'package:nomnom_util/extensions/string_capitalize.dart';
@@ -64,7 +64,7 @@ class StoreDetailsMenuPage extends ConsumerStatefulWidget {
   final DateTime? preorderDateTime;
   final Function() onRefresh;
   final List<GlobalKeySections> sections;
-  final StoreApi api;
+  final BaseStoreApi api;
   final StateNotifierProvider<CurrentUserNotifier, UserModel?>
   currentUserProvider;
 
@@ -588,7 +588,7 @@ class _SearchBarContent extends StatelessWidget {
   final MerchantWithCity model;
   final Color grey;
   final Color orangePalette;
-  final StoreApi api;
+  final BaseStoreApi api;
   final AppApi appApi;
   final DataCacher prefs;
   final StateNotifierProvider<CurrentLocationNotifier, UserAddress?>

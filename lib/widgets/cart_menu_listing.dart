@@ -12,7 +12,7 @@ import 'package:nomnom_util/api/app_abstract.dart';
 import 'package:nomnom_util/api/cart_api.dart';
 import 'package:nomnom_util/api/data_cacher.dart';
 import 'package:nomnom_util/api/firebase_firestore_support.dart';
-import 'package:nomnom_util/api/store_api.dart';
+import 'package:nomnom_util/api/base_store_api.dart';
 import 'package:nomnom_util/extensions/color_ext.dart';
 import 'package:nomnom_util/extensions/date_ext.dart';
 import 'package:nomnom_util/extensions/duration_ext.dart';
@@ -80,7 +80,7 @@ class CartMenuListing extends ConsumerStatefulWidget {
   final bool orderForSomeoneElse;
   final FirebaseFirestoreSupport firestore;
   final CartApi cartApi;
-  final StoreApi api;
+  final BaseStoreApi api;
   final StateNotifierProvider<CurrentUserCartNotifier, List<CartModel>>
   currentUserCartProvider;
   final StateNotifierProvider<CurrentLocationNotifier, UserAddress?>

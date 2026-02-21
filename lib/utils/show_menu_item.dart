@@ -4,7 +4,7 @@ import 'package:nomnom_util/api/app_abstract.dart';
 import 'package:nomnom_util/api/cart_api.dart';
 import 'package:nomnom_util/api/data_cacher.dart';
 import 'package:nomnom_util/api/firebase_firestore_support.dart';
-import 'package:nomnom_util/api/store_api.dart';
+import 'package:nomnom_util/api/base_store_api.dart';
 import 'package:nomnom_util/models/area_setting.dart';
 import 'package:nomnom_util/models/cart.dart';
 import 'package:nomnom_util/models/cart_item.dart';
@@ -24,7 +24,7 @@ void showMenuReplacementBottomSheet(
   String merchantName,
   String? orderId,
   FutureProvider<MenuResult> menuProvider,
-  StoreApi api,
+  BaseStoreApi api,
   StateNotifierProvider<CurrentUserCartNotifier, List<CartModel>>
   currentUserCartProvider,
   CartApi cartApi,

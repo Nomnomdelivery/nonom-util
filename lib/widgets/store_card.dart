@@ -5,7 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
 import 'package:nomnom_util/api/firebase_firestore_support.dart';
-import 'package:nomnom_util/api/store_api.dart';
+import 'package:nomnom_util/api/base_store_api.dart';
 import 'package:nomnom_util/extensions/color_opacity.dart';
 import 'package:nomnom_util/extensions/string_capitalize.dart';
 import 'package:nomnom_util/extensions/string_parser.dart';
@@ -144,7 +144,7 @@ class StoreCard extends StatefulWidget {
   final MerchantWithCity store;
   final bool isGridView;
   final FirebaseFirestoreSupport ffs;
-  final StoreApi api;
+  final BaseStoreApi api;
   final StateNotifierProvider<CurrentUserNotifier, UserModel?>
   currentUserProvider;
 

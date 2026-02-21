@@ -6,7 +6,7 @@ import 'package:nomnom_util/api/app_abstract.dart';
 import 'package:nomnom_util/api/cart_api.dart';
 import 'package:nomnom_util/api/data_cacher.dart';
 import 'package:nomnom_util/api/firebase_firestore_support.dart';
-import 'package:nomnom_util/api/store_api.dart';
+import 'package:nomnom_util/api/base_store_api.dart';
 import 'package:nomnom_util/extensions/string_capitalize.dart';
 import 'package:nomnom_util/models/area_setting.dart';
 import 'package:nomnom_util/models/cart.dart';
@@ -33,7 +33,7 @@ class VisitShop extends StatefulWidget {
     required this.prefs,
   });
   final MerchantWithCity store;
-  final StoreApi api;
+  final BaseStoreApi api;
   final StateNotifierProvider<CurrentUserNotifier, UserModel?>
   currentUserProvider;
   final StateProvider<AreaSetting?> areaSettingsProvider;
