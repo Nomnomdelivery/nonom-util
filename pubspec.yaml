@@ -31,11 +31,11 @@ dev_dependencies:
 # following page: https://dart.dev/tools/pub/pubspec
 
 # The following section is specific to Flutter packages.
-flutter:
-  # To add assets to your package, add an assets section, like this:
-  assets:
-    - lib/assets/images/
-    - lib/assets/icons/
+# flutter:
+#   # To add assets to your package, add an assets section, like this:
+#   assets:
+#     - lib/assets/images/
+#     - lib/assets/icons/
 
 
   #   - images/a_dot_ham.jpeg
