@@ -1028,18 +1028,19 @@ class CartMenuListingState extends ConsumerState<CartMenuListing>
                                                             height: 70,
                                                             width: 70,
                                                             fit: BoxFit.cover,
-                                                            errorWidget:
-                                                                (
-                                                                  context,
-                                                                  url,
-                                                                  error,
-                                                                ) => Image.asset(
-                                                                  'packages/nomnom_util/assets/images/customer.jpg',
-                                                                  height: 70,
-                                                                  width: 70,
-                                                                  fit: BoxFit
-                                                                      .cover,
-                                                                ),
+                                                            //TODO: image
+                                                            // errorWidget:
+                                                            //     (
+                                                            //       context,
+                                                            //       url,
+                                                            //       error,
+                                                            //     ) => Image.asset(
+                                                            //       'packages/nomnom_util/assets/images/customer.jpg',
+                                                            //       height: 70,
+                                                            //       width: 70,
+                                                            //       fit: BoxFit
+                                                            //           .cover,
+                                                            //     ),
                                                           ),
                                                         )
                                                       else
