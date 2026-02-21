@@ -34,8 +34,8 @@ dev_dependencies:
 flutter:
   # To add assets to your package, add an assets section, like this:
   assets:
-    - packages/nomnom_util/assets/images/
-    - packages/nomnom_util/assets/icons/
+    - assets/images/
+    - assets/icons/
 
 
   #   - images/a_dot_ham.jpeg
