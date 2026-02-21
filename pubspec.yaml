@@ -1,7 +1,6 @@
 name: nomnom_util
 description: "A new Flutter package project."
 version: 0.0.1
-homepage:
 
 environment:
   sdk: ^3.10.0
@@ -10,6 +9,18 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  crypto: ^3.0.6
+  riverpod: ^2.6.1
+  flutter_riverpod: ^2.6.1
+  cloud_firestore: ^5.6.8
+  gap: ^3.0.1
+  fluttertoast: ^8.2.12
+  cached_network_image: ^3.4.1
+  geolocator: ^14.0.1
+  intl: ^0.20.2
+  flutter_animate: ^4.5.2
+  toastification: ^3.0.3
+  flutter_slidable: ^4.0.0
 
 dev_dependencies:
   flutter_test:
@@ -21,10 +32,10 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # To add assets to your package, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
+  assets:
+    - assets
+
   #   - images/a_dot_ham.jpeg
   #
   # For details regarding assets in packages, see
