@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
 import 'package:intl/intl.dart';
-import 'package:nomnom_util/api/firebase_firestore_support.dart';
+import 'package:nomnom_util/api/base_firebase_firestore_support.dart';
 import 'package:nomnom_util/api/base_store_api.dart';
 import 'package:nomnom_util/extensions/color_opacity.dart';
 import 'package:nomnom_util/extensions/string_capitalize.dart';

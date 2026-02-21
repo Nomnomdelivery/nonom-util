@@ -1,6 +1,6 @@
 export 'api/base_store_api.dart';
-export 'api/cart_api.dart';
-export 'api/app_abstract.dart';
-export 'api/auth_api.dart';
-export 'api/data_cacher.dart';
-export 'api/firebase_firestore_support.dart';
+export 'api/base_cart_api.dart';
+export 'api/base_app_api.dart';
+export 'api/base_auth_api.dart';
+export 'api/base_data_cacher.dart';
+export 'api/base_firebase_firestore_support.dart';

@@ -1,6 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nomnom_util/api/auth_api.dart';
+import 'package:nomnom_util/api/base_auth_api.dart';
 import 'package:nomnom_util/models/user_address.dart';
 import 'package:nomnom_util/models/user_model.dart';
 import 'package:nomnom_util/utils/computation.dart';

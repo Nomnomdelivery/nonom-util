@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:gap/gap.dart';
-import 'package:nomnom_util/api/firebase_firestore_support.dart';
+import 'package:nomnom_util/api/base_firebase_firestore_support.dart';
 import 'package:nomnom_util/models/merchant/merchant_with_city.dart';
 import 'package:nomnom_util/widgets/custom_loader.dart';
 import 'package:nomnom_util/widgets/store_card.dart';

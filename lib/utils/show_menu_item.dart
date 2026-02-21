@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:nomnom_util/api/app_abstract.dart';
-import 'package:nomnom_util/api/cart_api.dart';
-import 'package:nomnom_util/api/data_cacher.dart';
-import 'package:nomnom_util/api/firebase_firestore_support.dart';
+import 'package:nomnom_util/api/base_app_api.dart';
+import 'package:nomnom_util/api/base_cart_api.dart';
+import 'package:nomnom_util/api/base_data_cacher.dart';
+import 'package:nomnom_util/api/base_firebase_firestore_support.dart';
 import 'package:nomnom_util/api/base_store_api.dart';
 import 'package:nomnom_util/models/area_setting.dart';
 import 'package:nomnom_util/models/cart.dart';
