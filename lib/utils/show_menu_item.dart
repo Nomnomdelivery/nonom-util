@@ -16,27 +16,27 @@ import 'package:nomnom_util/providers/user_provider.dart';
 import 'package:nomnom_util/utils/color_pallete.dart';
 import 'package:nomnom_util/widgets/menu_replacement_content.dart';
 
-void showMenuReplacementBottomSheet(
-  BuildContext context,
-  CartItem itemToReplace,
-  int itemIndex,
-  int merchantId,
-  String merchantName,
+void showMenuReplacementBottomSheet({
+  required BuildContext context,
+  required CartItem itemToReplace,
+  required int itemIndex,
+  required int merchantId,
+  required String merchantName,
   String? orderId,
-  FutureProvider<MenuResult> menuProvider,
-  BaseStoreApi api,
-  StateNotifierProvider<CurrentUserCartNotifier, List<CartModel>>
+  required FutureProvider<MenuResult> menuProvider,
+  required BaseStoreApi api,
+  required StateNotifierProvider<CurrentUserCartNotifier, List<CartModel>>
   currentUserCartProvider,
-  CartApi cartApi,
-  FirebaseFirestoreSupport firestore,
-  StateProvider<AreaSetting?> areaSettingsProvider,
-  AppApi appApi,
-  StateNotifierProvider<CurrentUserNotifier, UserModel?> currentUserProvider,
-  StateNotifierProvider<CurrentLocationNotifier, UserAddress?>
+  required CartApi cartApi,
+  required FirebaseFirestoreSupport firestore,
+  required StateProvider<AreaSetting?> areaSettingsProvider,
+  required AppApi appApi,
+  required StateNotifierProvider<CurrentUserNotifier, UserModel?>
+  currentUserProvider,
+  required StateNotifierProvider<CurrentLocationNotifier, UserAddress?>
   currentLocationProvider,
-
-  DataCacher prefs,
-) {
+  required DataCacher prefs,
+}) {
   showModalBottomSheet(
     context: context,
     isScrollControlled: true,
