@@ -1,7 +1,7 @@
 import 'package:nomnom_util/models/area_setting.dart';
 import 'package:nomnom_util/models/merchant/merchant_with_city.dart';
 
-abstract class AppApi {
+abstract class BaseAppApi {
   Future<AreaSetting?> areaSettings({required String city});
 
   // Future<List<WhitelistLocationModel>> getWhiteList({

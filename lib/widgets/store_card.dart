@@ -143,7 +143,7 @@ class StoreCard extends StatefulWidget {
   });
   final MerchantWithCity store;
   final bool isGridView;
-  final FirebaseFirestoreSupport ffs;
+  final BaseFirebaseFirestoreSupport ffs;
   final BaseStoreApi api;
   final StateNotifierProvider<CurrentUserNotifier, UserModel?>
   currentUserProvider;

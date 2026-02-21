@@ -1,7 +1,7 @@
 import 'package:nomnom_util/models/user/user_ex.dart';
 import 'package:nomnom_util/models/user_model.dart';
 
-abstract class AuthApi {
+abstract class BaseAuthApi {
   Future<bool> deleteAccount();
 
   Future<void> useReferralCode(String code, int id);

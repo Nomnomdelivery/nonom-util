@@ -37,14 +37,14 @@ class VisitShop extends StatefulWidget {
   final StateNotifierProvider<CurrentUserNotifier, UserModel?>
   currentUserProvider;
   final StateProvider<AreaSetting?> areaSettingsProvider;
-  final AppApi appApi;
+  final BaseAppApi appApi;
   final StateNotifierProvider<CurrentUserCartNotifier, List<CartModel>>
   currentUserCartProvider;
-  final CartApi cartApi;
-  final FirebaseFirestoreSupport firestore;
+  final BaseCartApi cartApi;
+  final BaseFirebaseFirestoreSupport firestore;
   final StateNotifierProvider<CurrentLocationNotifier, UserAddress?>
   currentLocationProvider;
-  final DataCacher prefs;
+  final BaseDataCacher prefs;
   @override
   State<VisitShop> createState() => _VisitShopState();
 }

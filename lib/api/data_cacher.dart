@@ -1,6 +1,6 @@
 import 'dart:async';
 
-abstract class DataCacher {
+abstract class BaseDataCacher {
   Future<void> logout();
 
   Future<void> init();

@@ -72,13 +72,13 @@ class StoreDetailsMenuPage extends ConsumerStatefulWidget {
 
   final StateNotifierProvider<CurrentUserCartNotifier, List<CartModel>>
   currentUserCartProvider;
-  final CartApi cartApi;
-  final FirebaseFirestoreSupport firestore;
+  final BaseCartApi cartApi;
+  final BaseFirebaseFirestoreSupport firestore;
   final StateNotifierProvider<CurrentLocationNotifier, UserAddress?>
   currentLocationProvider;
 
-  final AppApi appApi;
-  final DataCacher prefs;
+  final BaseAppApi appApi;
+  final BaseDataCacher prefs;
 
   @override
   ConsumerState<StoreDetailsMenuPage> createState() =>
@@ -589,11 +589,11 @@ class _SearchBarContent extends StatelessWidget {
   final Color grey;
   final Color orangePalette;
   final BaseStoreApi api;
-  final AppApi appApi;
-  final DataCacher prefs;
+  final BaseAppApi appApi;
+  final BaseDataCacher prefs;
   final StateNotifierProvider<CurrentLocationNotifier, UserAddress?>
   currentLocationProvider;
-  final FirebaseFirestoreSupport firestore;
+  final BaseFirebaseFirestoreSupport firestore;
   final StateProvider<AreaSetting?> areaSettingsProvider;
 
   @override

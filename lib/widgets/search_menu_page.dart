@@ -38,12 +38,12 @@ class SearchMenuPage extends ConsumerStatefulWidget {
   final String? keyword;
   final int? merchantID;
   final BaseStoreApi api;
-  final AppApi appApi;
-  final DataCacher prefs;
+  final BaseAppApi appApi;
+  final BaseDataCacher prefs;
   final StateNotifierProvider<CurrentLocationNotifier, UserAddress?>
   currentLocationProvider;
   final StateProvider<AreaSetting?> areaSettingsProvider;
-  final FirebaseFirestoreSupport ffs;
+  final BaseFirebaseFirestoreSupport ffs;
   @override
   ConsumerState<SearchMenuPage> createState() => _SearchMenuPageState();
 }

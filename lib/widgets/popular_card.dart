@@ -47,14 +47,14 @@ class PopularCard extends StatelessWidget with ColorPalette {
   final BaseStoreApi api;
   final StateNotifierProvider<CurrentUserCartNotifier, List<CartModel>>
   currentUserCartProvider;
-  final CartApi cartApi;
-  final FirebaseFirestoreSupport firestore;
+  final BaseCartApi cartApi;
+  final BaseFirebaseFirestoreSupport firestore;
   final StateNotifierProvider<CurrentLocationNotifier, UserAddress?>
   currentLocationProvider;
   final StateNotifierProvider<CurrentUserNotifier, UserModel?>
   currentUserProvider;
-  final AppApi appApi;
-  final DataCacher prefs;
+  final BaseAppApi appApi;
+  final BaseDataCacher prefs;
   @override
   Widget build(BuildContext context) {
     return Consumer(

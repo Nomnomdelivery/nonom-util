@@ -7,7 +7,7 @@ import 'package:nomnom_util/models/qoutation_model.dart';
 import 'package:nomnom_util/models/selected_option_cat.dart';
 import 'package:nomnom_util/models/user_address.dart';
 
-abstract class CartApi {
+abstract class BaseCartApi {
   Future<bool> checkRider({
     required int merchantID,
     required List<int> riderIds,

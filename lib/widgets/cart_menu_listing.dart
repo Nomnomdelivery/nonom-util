@@ -78,8 +78,8 @@ class CartMenuListing extends ConsumerStatefulWidget {
   });
   final ValueChanged<CheckoutData> onCheckout;
   final bool orderForSomeoneElse;
-  final FirebaseFirestoreSupport firestore;
-  final CartApi cartApi;
+  final BaseFirebaseFirestoreSupport firestore;
+  final BaseCartApi cartApi;
   final BaseStoreApi api;
   final StateNotifierProvider<CurrentUserCartNotifier, List<CartModel>>
   currentUserCartProvider;
@@ -94,8 +94,8 @@ class CartMenuListing extends ConsumerStatefulWidget {
   final StateNotifierProvider<CurrentUserNotifier, UserModel?>
   currentUserProvider;
   final StateProvider<bool> cartLoadingProvider;
-  final AppApi appApi;
-  final DataCacher prefs;
+  final BaseAppApi appApi;
+  final BaseDataCacher prefs;
 
   @override
   ConsumerState<CartMenuListing> createState() => CartMenuListingState();

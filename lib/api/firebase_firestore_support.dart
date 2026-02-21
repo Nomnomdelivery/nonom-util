@@ -3,7 +3,7 @@ import 'package:nomnom_util/models/cart.dart';
 import 'package:nomnom_util/models/delivery_model.dart';
 import 'package:nomnom_util/models/firebase/fire_active_schedule.dart';
 
-abstract class FirebaseFirestoreSupport {
+abstract class BaseFirebaseFirestoreSupport {
   Future<void> updateETA(String refcode, int eta);
 
   Future<DeliveryModel?> getRealtimeData({required String referenceCode});

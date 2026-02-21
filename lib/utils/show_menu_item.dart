@@ -27,15 +27,15 @@ void showMenuReplacementBottomSheet({
   required BaseStoreApi api,
   required StateNotifierProvider<CurrentUserCartNotifier, List<CartModel>>
   currentUserCartProvider,
-  required CartApi cartApi,
-  required FirebaseFirestoreSupport firestore,
+  required BaseCartApi cartApi,
+  required BaseFirebaseFirestoreSupport firestore,
   required StateProvider<AreaSetting?> areaSettingsProvider,
-  required AppApi appApi,
+  required BaseAppApi appApi,
   required StateNotifierProvider<CurrentUserNotifier, UserModel?>
   currentUserProvider,
   required StateNotifierProvider<CurrentLocationNotifier, UserAddress?>
   currentLocationProvider,
-  required DataCacher prefs,
+  required BaseDataCacher prefs,
 }) {
   showModalBottomSheet(
     context: context,

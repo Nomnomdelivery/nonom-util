@@ -15,7 +15,7 @@ class BuildSearchByStore extends StatelessWidget {
   });
   final FutureProvider<List<MerchantWithCity>> dataProvider;
   final bool isWholePage;
-  final FirebaseFirestoreSupport ffs;
+  final BaseFirebaseFirestoreSupport ffs;
   @override
   Widget build(BuildContext context) {
     final Size size = MediaQuery.of(context).size;

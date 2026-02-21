@@ -49,15 +49,15 @@ class MenuReplacementContent extends ConsumerStatefulWidget {
   final BaseStoreApi api;
   final StateNotifierProvider<CurrentUserCartNotifier, List<CartModel>>
   currentUserCartProvider;
-  final CartApi cartApi;
-  final FirebaseFirestoreSupport firestore;
+  final BaseCartApi cartApi;
+  final BaseFirebaseFirestoreSupport firestore;
   final StateProvider<AreaSetting?> areaSettingsProvider;
   final StateNotifierProvider<CurrentLocationNotifier, UserAddress?>
   currentLocationProvider;
   final StateNotifierProvider<CurrentUserNotifier, UserModel?>
   currentUserProvider;
-  final AppApi appApi;
-  final DataCacher prefs;
+  final BaseAppApi appApi;
+  final BaseDataCacher prefs;
 
   @override
   ConsumerState<MenuReplacementContent> createState() =>

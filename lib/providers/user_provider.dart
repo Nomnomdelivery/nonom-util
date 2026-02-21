@@ -60,7 +60,7 @@ class CurrentUserNotifier extends StateNotifier<UserModel?> {
     state = null;
   }
 
-  Future<void> fetchFromBackend({required AuthApi api}) async {
+  Future<void> fetchFromBackend({required BaseAuthApi api}) async {
     final result = await api.getUserDetails();
     result.fold((onResult) {
       state = onResult;
