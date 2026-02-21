@@ -30,7 +30,7 @@ abstract class BaseCartApi {
   Future<bool> delete(int id);
 
   Future<QuotationModel?> checkout({
-    required String items_string,
+    required String itemString,
     required List<CartItem> cartItems,
     required int eta,
     required int nomnomCoins,
@@ -58,7 +58,7 @@ abstract class BaseCartApi {
     int? cashOnHand,
   });
   Future<bool> savePendingOrder({
-    required String items_string,
+    required String itemString,
     required List<CartItem> cartItems,
     required int eta,
     required int nomnomCoins,
