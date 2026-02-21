@@ -281,7 +281,10 @@ class _MerchantPromoCodesState extends ConsumerState<MerchantPromoCodes>
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Image.asset("assets/images/rider.png", height: 120),
+                        Image.asset(
+                          "packages/nomnom_util/assets/images/rider.png",
+                          height: 120,
+                        ),
                         const Gap(20),
                         Text("No promos generated yet."),
                       ],
@@ -365,10 +368,10 @@ class _MerchantPromoCodesState extends ConsumerState<MerchantPromoCodes>
                                             width: 120,
                                             child: Image.asset(
                                               promo.promoType == 1
-                                                  ? "assets/images/delivery.jpg"
+                                                  ? "packages/nomnom_util/assets/images/delivery.jpg"
                                                   : promo.promoType == 2
-                                                  ? "assets/images/price.jpg"
-                                                  : "assets/images/delivery_price.jpg",
+                                                  ? "packages/nomnom_util/assets/images/price.jpg"
+                                                  : "packages/nomnom_util/assets/images/delivery_price.jpg",
                                               fit: BoxFit.cover,
                                               width: 120,
                                             ),

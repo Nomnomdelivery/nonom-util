@@ -206,14 +206,14 @@ class _StoreCardState extends State<StoreCard> with ColorPalette {
   }
 
   static const Widget _imageFallback = Image(
-    image: AssetImage('assets/images/customer.jpg'),
+    image: AssetImage('packages/nomnom_util/assets/images/customer.jpg'),
     height: 70,
     width: 70,
     fit: BoxFit.fill,
   );
 
   static const Widget _imageFallback80 = Image(
-    image: AssetImage('assets/images/customer.jpg'),
+    image: AssetImage('packages/nomnom_util/assets/images/customer.jpg'),
     height: 80,
     width: 80,
     fit: BoxFit.fill,

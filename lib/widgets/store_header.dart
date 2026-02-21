@@ -64,7 +64,7 @@ class StoreHeader extends StatelessWidget {
                           height: 80,
                           fit: BoxFit.cover,
                           errorWidget: (context, url, error) => Image.asset(
-                            'assets/images/customer.jpg',
+                            'packages/nomnom_util/assets/images/customer.jpg',
                             width: 80,
                             height: 80,
                             fit: BoxFit.cover,

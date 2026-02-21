@@ -61,9 +61,15 @@ class CartButton extends StatelessWidget with ColorPalette {
                   backgroundColor: Colors.white,
                   textStyle: _style,
                   textColor: orangePalette,
-                  child: Image.asset("assets/icons/new_bag.png", width: 25),
+                  child: Image.asset(
+                    "packages/nomnom_util/assets/icons/new_bag.png",
+                    width: 25,
+                  ),
                 )
-              : Image.asset("assets/icons/new_bag.png", width: 25);
+              : Image.asset(
+                  "packages/nomnom_util/assets/icons/new_bag.png",
+                  width: 25,
+                );
         } else {
           iconWidget = itemCount > 0
               ? Badge.count(
@@ -72,11 +78,14 @@ class CartButton extends StatelessWidget with ColorPalette {
                   textColor: textColor,
                   textStyle: _style,
                   child: ImageIcon(
-                    AssetImage("assets/icons/bag.png"),
+                    AssetImage("packages/nomnom_util/assets/icons/bag.png"),
                     color: mainColor,
                   ),
                 )
-              : ImageIcon(AssetImage("assets/icons/bag.png"), color: mainColor);
+              : ImageIcon(
+                  AssetImage("packages/nomnom_util/assets/icons/bag.png"),
+                  color: mainColor,
+                );
         }
         return IconButton(
           onPressed: () async {

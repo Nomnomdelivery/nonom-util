@@ -112,12 +112,12 @@ class CartMenuListingState extends ConsumerState<CartMenuListing>
   final List<DeliveryType> deliveryType = [
     DeliveryType(
       id: 1,
-      photoPath: "assets/images/food_delivery.png",
+      photoPath: "packages/nomnom_util/assets/images/food_delivery.png",
       title: "Food Delivery",
     ),
     DeliveryType(
       id: 2,
-      photoPath: "assets/images/food_pick-up.png",
+      photoPath: "packages/nomnom_util/assets/images/food_pick-up.png",
       title: "Food Pick-up",
     ),
   ];
@@ -1033,7 +1033,7 @@ class CartMenuListingState extends ConsumerState<CartMenuListing>
                                                                   url,
                                                                   error,
                                                                 ) => Image.asset(
-                                                                  'assets/images/customer.jpg',
+                                                                  'packages/nomnom_util/assets/images/customer.jpg',
                                                                   height: 70,
                                                                   width: 70,
                                                                   fit: BoxFit
@@ -1699,7 +1699,9 @@ class CartMenuListingState extends ConsumerState<CartMenuListing>
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     ImageIcon(
-                                      AssetImage("assets/icons/promo.png"),
+                                      AssetImage(
+                                        "packages/nomnom_util/assets/icons/promo.png",
+                                      ),
                                       color: orangePalette,
                                     ),
                                     const Gap(10),
