@@ -9,6 +9,7 @@ import 'package:nomnom_util/models/firebase/fire_payment.dart';
 import 'package:nomnom_util/models/firebase/fire_recipient.dart';
 import 'package:nomnom_util/models/firebase/fire_rider.dart';
 import 'package:nomnom_util/models/firebase/item_unavailable_action.dart';
+import 'package:nomnom_util/utils/date_parse.dart';
 
 class DeliveryModel {
   final DateTime? riderPickedUpAt;
@@ -50,8 +51,10 @@ class DeliveryModel {
   final double change;
   final double usedNomnomCoins;
   final bool isMerchantTestAccount;
+  final DateTime? lastRiderRejectedAt;
 
   DeliveryModel({
+    required this.lastRiderRejectedAt,
     required this.isMerchantTestAccount,
     required this.merchant,
     required this.deliveryTime,
@@ -174,6 +177,7 @@ class DeliveryModel {
       change: data['change'] == null ? 0.0 : (data['change'] as num).toDouble(),
       usedNomnomCoins: (data['used_nomnom_coins'] ?? 0).toDouble(),
       isMerchantTestAccount: (data['is_merchant_test_account'] ?? 0) == 1,
+      lastRiderRejectedAt: parseDateNullable(data['last_rider_rejected_at']),
     );
   }
 
