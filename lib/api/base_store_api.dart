@@ -9,7 +9,7 @@ import 'package:nomnom_util/models/promo.dart';
 import 'package:nomnom_util/models/store_feedback.dart';
 
 abstract class BaseStoreApi {
-  Future<int?> getStoreCount();
+  // Future<int?> getStoreCount();
 
   Future<MerchantDetails> publicDetails(int id);
 
@@ -19,19 +19,19 @@ abstract class BaseStoreApi {
     String? city,
   });
 
-  /// Returns cached merchant search results synchronously, or null if no cache exists.
-  List<MerchantWithCity>? getCachedSearch({
-    String? keyword,
-    String? city,
-    required int serviceID,
-  });
+  // /// Returns cached merchant search results synchronously, or null if no cache exists.
+  // List<MerchantWithCity>? getCachedSearch({
+  //   String? keyword,
+  //   String? city,
+  //   required int serviceID,
+  // });
 
-  /// Clears the cache for a specific search
-  Future<void> clearCache({
-    String? keyword,
-    String? city,
-    required int serviceID,
-  });
+  // /// Clears the cache for a specific search
+  // Future<void> clearCache({
+  //   String? keyword,
+  //   String? city,
+  //   required int serviceID,
+  // });
 
   Future<List<MerchantWithCity>> search({
     String? keyword,
@@ -42,7 +42,7 @@ abstract class BaseStoreApi {
   Future<StoreFeedback> getRatingsAndFeedback(int id, {isPublic = false});
 
   Future<MerchantDetails> getDetails(int id, {bool isPublic = false});
-  Future<MenuItemDetails?> getPublicMenuDetails(int id);
+  // Future<MenuItemDetails?> getPublicMenuDetails(int id);
 
   Future<MenuItemDetails?> getMenuDetails(int id, {bool isPublic = false});
 

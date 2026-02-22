@@ -2,15 +2,15 @@ import 'package:nomnom_util/models/user/user_ex.dart';
 import 'package:nomnom_util/models/user_model.dart';
 
 abstract class BaseAuthApi {
-  Future<bool> deleteAccount();
+  // Future<bool> deleteAccount();
 
-  Future<void> useReferralCode(String code, int id);
+  // Future<void> useReferralCode(String code, int id);
 
-  Future<bool> logout();
+  // Future<bool> logout();
 
-  Future<bool> updateDefaultAddressint(int addressID);
+  // Future<bool> updateDefaultAddressint(int addressID);
 
-  Future<String?> signIn(String firebaseToken, [String? email]);
+  // Future<String?> signIn(String firebaseToken, [String? email]);
 
   // Future<bool> updatePicture(File file);
 

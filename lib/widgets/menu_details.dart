@@ -584,12 +584,11 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                           ? widget.item.photoUrl
                                           : selectedVariant!.photoUrl,
                                       fit: BoxFit.cover,
-                                      //TODO: fix image
-                                      // errorWidget: (context, url, error) =>
-                                      //     Image.asset(
-                                      //       'packages/nomnom_util/assets/images/customer.jpg',
-                                      //       fit: BoxFit.cover,
-                                      //     ),
+                                      errorWidget: (context, url, error) =>
+                                          Image.asset(
+                                            'packages/nomnom_util/assets/images/customer.jpg',
+                                            fit: BoxFit.cover,
+                                          ),
                                     ),
                                   ),
                                 )
@@ -607,23 +606,6 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                             fontWeight: FontWeight.w600,
                             color: Colors.black,
                           ),
-                          actions: [
-                            if (!widget.isReplacement)
-                              Container(
-                                key: _cartButtonKey,
-                                child: CartButton(
-                                  badgeColor: red,
-                                  isFilled: false,
-                                  mainColor: Colors.black,
-                                  textColor: Colors.white,
-                                  currentLocationProvider:
-                                      widget.currentLocationProvider,
-                                  currentUserCartProvider:
-                                      widget.currentUserCartProvider,
-                                ),
-                              ),
-                            const Gap(10),
-                          ],
                         ),
                         SliverList.list(
                           children: [
@@ -847,24 +829,6 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                         ],
                                       ),
                                     ),
-                                    const Gap(15),
-                                    VisitShop(
-                                      store: data.merchant,
-                                      api: widget.api,
-                                      currentUserProvider:
-                                          widget.currentUserProvider,
-                                      areaSettingsProvider:
-                                          widget.areaSettingsProvider,
-                                      appApi: widget.appApi,
-                                      currentUserCartProvider:
-                                          widget.currentUserCartProvider,
-                                      cartApi: widget.cartApi,
-                                      firestore: widget.firestore,
-                                      currentLocationProvider:
-                                          widget.currentLocationProvider,
-                                      prefs: widget.prefs,
-                                    ),
-                                    const Gap(10),
                                   ],
                                 );
                               },

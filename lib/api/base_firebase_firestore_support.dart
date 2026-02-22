@@ -6,9 +6,9 @@ import 'package:nomnom_util/models/firebase/fire_active_schedule.dart';
 abstract class BaseFirebaseFirestoreSupport {
   Future<void> updateETA(String refcode, int eta);
 
-  Future<DeliveryModel?> getRealtimeData({required String referenceCode});
+  // Future<DeliveryModel?> getRealtimeData({required String referenceCode});
 
-  Stream<DeliveryModel?> listenToSpecificItem({required String referenceCode});
+  // Stream<DeliveryModel?> listenToSpecificItem({required String referenceCode});
 
   Stream<List<FireActiveSchedule>> listenToActiveRiders({
     required String cityName,
@@ -49,27 +49,27 @@ abstract class BaseFirebaseFirestoreSupport {
   // });
   // Future<void> updateStatus({required String refcode, required int status});
   // Future<AppRemoteConfig> getRemoteConfig();
-  Future<String> uploadPhoto(File file, String fileName, String refCode);
+  // Future<String> uploadPhoto(File file, String fileName, String refCode);
 
-  Future<void> addNewMessage({
-    required String message,
-    required String refcode,
-    required int senderID,
-    required String senderAvatar,
-    required String senderName,
-    File? photo,
-  });
+  // Future<void> addNewMessage({
+  //   required String message,
+  //   required String refcode,
+  //   required int senderID,
+  //   required String senderAvatar,
+  //   required String senderName,
+  //   File? photo,
+  // });
 
-  Future<void> addRating({
-    required String ref,
-    required int riderRating,
-    required String riderComment,
-    required int storeRating,
-    required String storeComment,
-  });
+  // Future<void> addRating({
+  //   required String ref,
+  //   required int riderRating,
+  //   required String riderComment,
+  //   required int storeRating,
+  //   required String storeComment,
+  // });
 
-  Future<void> addFcmToken(int id, String token);
-  Future<List<String>> getTokens(int id);
+  // Future<void> addFcmToken(int id, String token);
+  // Future<List<String>> getTokens(int id);
 
-  Future<void> removeToken(int id, String token);
+  // Future<void> removeToken(int id, String token);
 }
