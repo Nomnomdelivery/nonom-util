@@ -50,9 +50,9 @@ class CartItem {
       selectedVariant: json['selected_variant'] == null
           ? null
           : MenuVariation.fromJson(json['selected_variant']),
-      prepTime: json['preparation_time'] == null
+      prepTime: json['prep_time'] == null
           ? 0
-          : int.parse(json['preparation_time'].toString()),
+          : int.parse(json['prep_time'].toString()),
       options: options.map((e) => SelectedOptionCat.fromJson(e)).toList(),
       instruction: json['special_instructions'] ?? "",
       rawPrice: double.tryParse(json['price'].toString()) ?? 0,
