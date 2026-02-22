@@ -49,8 +49,10 @@ class DeliveryModel {
   final int cashOnhand;
   final double change;
   final double usedNomnomCoins;
+  final bool isMerchantTestAccount;
 
   DeliveryModel({
+    required this.isMerchantTestAccount,
     required this.merchant,
     required this.deliveryTime,
     required this.deliveryDate,
@@ -171,6 +173,7 @@ class DeliveryModel {
 
       change: data['change'] == null ? 0.0 : (data['change'] as num).toDouble(),
       usedNomnomCoins: (data['used_nomnom_coins'] ?? 0).toDouble(),
+      isMerchantTestAccount: (data['is_merchant_test_account'] ?? 0) == 1,
     );
   }
 
