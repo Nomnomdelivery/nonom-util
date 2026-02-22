@@ -219,4 +219,13 @@ class DeliveryModel {
     final effectiveStatus = status == 9 ? 5 : status;
     return statusColorMap[effectiveStatus] ?? Colors.black;
   }
+
+  Color statusColorRedGreen() {
+    const Set<int> redStatuses = {
+      6,
+      7,
+      8,
+    }; // Not Accepted, Cancelled, System Cancelled
+    return redStatuses.contains(status) ? Colors.red : Colors.green;
+  }
 }
