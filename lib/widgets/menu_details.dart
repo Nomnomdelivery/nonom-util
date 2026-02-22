@@ -17,7 +17,6 @@ import 'package:nomnom_util/extensions/num_currency_format.dart';
 import 'package:nomnom_util/extensions/string_capitalize.dart';
 import 'package:nomnom_util/models/area_setting.dart';
 import 'package:nomnom_util/models/cart.dart';
-import 'package:nomnom_util/models/cart_button.dart';
 import 'package:nomnom_util/models/cart_item.dart';
 import 'package:nomnom_util/models/menu/menu_item.dart';
 import 'package:nomnom_util/models/menu/menu_item_details.dart';
@@ -36,7 +35,6 @@ import 'package:nomnom_util/widgets/meal_inclusion_page.dart';
 import 'package:nomnom_util/widgets/optiona_category_display.dart';
 import 'package:nomnom_util/widgets/quantity_button.dart';
 import 'package:nomnom_util/widgets/variation_display.dart';
-import 'package:nomnom_util/widgets/visit_shop.dart';
 
 class MenuDetails extends ConsumerStatefulWidget {
   const MenuDetails({

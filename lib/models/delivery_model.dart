@@ -195,7 +195,7 @@ class DeliveryModel {
       storeReadyForPickupAt: parseDateNullable(
         data['store_ready_for_pickup_at'],
       ),
-      riderRejections: int.parse(data['rider_rejections'] ?? "0"),
+      riderRejections: data['rider_rejections'] ? 0 : data['rider_rejections'],
       unavailableAction: UnavailableAction.fromJson(
         data['item_unavailable_action'],
       ),
