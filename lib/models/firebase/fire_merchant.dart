@@ -7,15 +7,18 @@ class FireMerchant {
   final GeoPoint coordinates;
   final FireRating? rate;
   final double merchantFee;
+  final int acceptanceWindowMinutes;
   const FireMerchant({
     required this.name,
     required this.photoUrl,
     required this.coordinates,
     required this.rate,
     required this.merchantFee,
+    required this.acceptanceWindowMinutes,
   });
 
   factory FireMerchant.fromJson(Map<String, dynamic> json) => FireMerchant(
+    acceptanceWindowMinutes: int.parse(json['acceptance_date_time'].toString()),
     rate: json['rate'] == null ? null : FireRating.fromJson(json['rate']),
     name: json['name'],
     coordinates: json['coordinates'].toString().toGeopoint(),
@@ -29,5 +32,6 @@ class FireMerchant {
     "photo_url": photoUrl,
     "coordinates": "${coordinates.latitude},${coordinates.longitude}",
     "merchant_fee": merchantFee,
+    "acceptance_date_time": acceptanceWindowMinutes,
   };
 }
