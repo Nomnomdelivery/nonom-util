@@ -57,10 +57,8 @@ class DeliveryModel {
   final int riderRejections;
   final UnavailableAction unavailableAction;
   final List<int> candidates;
-  final String refCode;
 
   DeliveryModel({
-    required this.refCode,
     required this.candidates,
     required this.unavailableAction,
     required this.riderRejections,
@@ -202,7 +200,6 @@ class DeliveryModel {
         data['item_unavailable_action'],
       ),
       candidates: riderCandidates.map((e) => int.parse(e.toString())).toList(),
-      refCode: data['cart_item_ref_code'] ?? "",
     );
   }
 

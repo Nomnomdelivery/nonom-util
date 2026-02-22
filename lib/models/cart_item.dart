@@ -18,7 +18,10 @@ class CartItem {
   final MenuVariation? selectedVariant;
   final List<SelectedOptionCat> options;
   final bool isReplaced;
+  final String refCode;
+
   CartItem({
+    required this.refCode,
     required this.cartID,
     required this.isSelected,
     required this.prepDay,
@@ -69,6 +72,7 @@ class CartItem {
       subtotal: double.parse(json['subtotal'].toString()),
       description: '',
       isReplaced: json['replaced_by'] != null ? true : false,
+      refCode: json['cart_item_ref_code'] ?? "",
     );
   }
 
@@ -108,6 +112,7 @@ class CartItem {
           int.tryParse(menuItemData['quantity_limit']?.toString() ?? '0') ?? 0,
       isAvailable: json['is_available'] == 1,
       subtotal: double.parse(json['price'].toString()),
+      refCode: json["cart_item_ref_code"] ?? "",
     );
   }
 
