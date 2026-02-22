@@ -56,8 +56,10 @@ class DeliveryModel {
   final DateTime? storeReadyForPickupAt;
   final int riderRejections;
   final UnavailableAction unavailableAction;
+  final List<int> candidates;
 
   DeliveryModel({
+    required this.candidates,
     required this.unavailableAction,
     required this.riderRejections,
     required this.storeReadyForPickupAt,
@@ -109,6 +111,11 @@ class DeliveryModel {
     final List itms = data['cart_items'] == null
         ? []
         : data['cart_items'] as List;
+
+    final List riderCandidates = data['rider_candidates'] ?? [];
+    if (riderCandidates.contains(null)) {
+      riderCandidates.removeWhere((e) => e == null);
+    }
 
     return DeliveryModel(
       usedCoins: (data['used_nomnom_coins'] ?? 0).toDouble(),
@@ -192,6 +199,7 @@ class DeliveryModel {
       unavailableAction: UnavailableAction.fromJson(
         data['item_unavailable_action'],
       ),
+      candidates: riderCandidates.map((e) => int.parse(e.toString())).toList(),
     );
   }
 
