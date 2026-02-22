@@ -1,7 +1,9 @@
+import 'package:nomnom_util/models/firebase/ordered_by.dart';
+
 class FireRecipient {
   final String contactNumber;
   final String name;
-  final String orderedBy;
+  final OrderedBy orderedBy;
 
   FireRecipient({
     required this.contactNumber,
@@ -14,7 +16,7 @@ class FireRecipient {
     return FireRecipient(
       contactNumber: data['contact_number'] as String,
       name: data['name'] as String,
-      orderedBy: data['ordered_by'] as String,
+      orderedBy: OrderedBy.fromFirestore(data['ordered_by']),
     );
   }
 
