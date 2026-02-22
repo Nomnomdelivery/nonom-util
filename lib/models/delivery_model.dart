@@ -228,4 +228,21 @@ class DeliveryModel {
     }; // Not Accepted, Cancelled, System Cancelled
     return redStatuses.contains(status) ? Colors.red : Colors.green;
   }
+
+  String shortStatusString() {
+    const Map<int, String> statusMap = {
+      0: 'Waiting for Store',
+      1: 'Preparing Order',
+      11: 'Assigned',
+      2: 'Ready for Pickup',
+      3: 'Picked Up',
+      4: 'Arrived',
+      5: 'Delivered',
+      6: 'Not Accepted',
+      7: 'Cancelled',
+      8: 'System Cancelled',
+      9: 'Remitted',
+    };
+    return statusMap[status] ?? 'Unknown Status';
+  }
 }
