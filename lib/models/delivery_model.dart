@@ -46,6 +46,7 @@ class DeliveryModel {
   final double discount;
   final ItemUnavailableAction itemUnavailableAction;
   final int userId;
+  final int cashOnhand;
 
   DeliveryModel({
     required this.merchant,
@@ -85,6 +86,7 @@ class DeliveryModel {
     required this.discount,
     required this.itemUnavailableAction,
     required this.userId,
+    required this.cashOnhand,
   });
 
   factory DeliveryModel.fromFirestore(Map<String, dynamic> data) {
@@ -155,6 +157,13 @@ class DeliveryModel {
             )
           : ItemUnavailableAction.fromJson(data['item_unavailable_action']),
       userId: data['user_id'] as int,
+      cashOnhand:
+          data['cash_on_hand'] == null ||
+              data['cash_on_hand'].toString().trim().isEmpty ||
+              double.tryParse(data['cash_on_hand'].toString()) == null ||
+              double.parse(data['cash_on_hand'].toString()) <= 0.0
+          ? 0
+          : double.parse(data['cash_on_hand'].toString()).toInt(),
     );
   }
 
