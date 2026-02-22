@@ -6,7 +6,7 @@ class FireMerchant {
   final String name, photoUrl;
   final GeoPoint coordinates;
   final FireRating? rate;
-  final double? merchantFee;
+  final double merchantFee;
   const FireMerchant({
     required this.name,
     required this.photoUrl,
@@ -20,7 +20,7 @@ class FireMerchant {
     name: json['name'],
     coordinates: json['coordinates'].toString().toGeopoint(),
     photoUrl: json['photo'],
-    merchantFee: json['merchant_fee']?.toDouble(),
+    merchantFee: json['merchant_fee'] ?? 0.0,
   );
 
   Map<String, dynamic> toJson() => {
