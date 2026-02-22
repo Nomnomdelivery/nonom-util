@@ -187,7 +187,7 @@ class DeliveryModel {
     return "System Cancelled";
   }
 
-  statusDateTime() {
+  DateTime statusDateTime() {
     debugPrint("Calculating status datetime for status: $status");
     debugPrint("Delivery date: $deliveryDate");
     if (status == 0) {
@@ -247,5 +247,22 @@ class DeliveryModel {
       9: 'Remitted',
     };
     return statusMap[status] ?? 'Unknown Status';
+  }
+
+  String statusStringNextStep() {
+    const Map<int, String> statusMap = {
+      0: 'Waiting for Store',
+      1: 'Ordered',
+      11: 'Assigned',
+      2: 'Ready for Pickup',
+      3: 'Picked Up',
+      4: 'Arrived',
+      5: 'Delivered',
+      6: 'User Cancelled',
+      7: 'Store Cancelled',
+      8: 'System Cancelled',
+      9: 'Remitted',
+    };
+    return statusMap[status + 1] ?? 'Unknown Status';
   }
 }
