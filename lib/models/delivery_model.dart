@@ -10,6 +10,7 @@ import 'package:nomnom_util/models/firebase/fire_recipient.dart';
 import 'package:nomnom_util/models/firebase/fire_rider.dart';
 import 'package:nomnom_util/models/firebase/item_unavailable_action.dart';
 import 'package:nomnom_util/utils/date_parse.dart';
+import 'unavailable_action.dart';
 
 class DeliveryModel {
   final DateTime? riderPickedUpAt;
@@ -52,8 +53,14 @@ class DeliveryModel {
   final double usedNomnomCoins;
   final bool isMerchantTestAccount;
   final DateTime? lastRiderRejectedAt;
+  final DateTime? storeReadyForPickupAt;
+  final int riderRejections;
+  final UnavailableAction unavailableAction;
 
   DeliveryModel({
+    required this.unavailableAction,
+    required this.riderRejections,
+    required this.storeReadyForPickupAt,
     required this.lastRiderRejectedAt,
     required this.isMerchantTestAccount,
     required this.merchant,
@@ -178,6 +185,13 @@ class DeliveryModel {
       usedNomnomCoins: (data['used_nomnom_coins'] ?? 0).toDouble(),
       isMerchantTestAccount: (data['is_merchant_test_account'] ?? 0) == 1,
       lastRiderRejectedAt: parseDateNullable(data['last_rider_rejected_at']),
+      storeReadyForPickupAt: parseDateNullable(
+        data['store_ready_for_pickup_at'],
+      ),
+      riderRejections: int.parse(data['rider_rejections'] ?? "0"),
+      unavailableAction: UnavailableAction.fromJson(
+        data['item_unavailable_action'],
+      ),
     );
   }
 
