@@ -45,6 +45,7 @@ class DeliveryModel {
   final FirePayment payment;
   final double discount;
   final ItemUnavailableAction itemUnavailableAction;
+  final int userId;
 
   DeliveryModel({
     required this.merchant,
@@ -83,6 +84,7 @@ class DeliveryModel {
     required this.payment,
     required this.discount,
     required this.itemUnavailableAction,
+    required this.userId,
   });
 
   factory DeliveryModel.fromFirestore(Map<String, dynamic> data) {
@@ -152,6 +154,7 @@ class DeliveryModel {
               string: "Remove it from my order",
             )
           : ItemUnavailableAction.fromJson(data['item_unavailable_action']),
+      userId: data['user_id'] as int,
     );
   }
 
