@@ -153,15 +153,6 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
 
       return freshData;
     }
-    final currentLocation = ref.watch(widget.currentLocationProvider);
-    final navigator = Navigator.of(context);
-    if (currentLocation == null) {
-      await Fluttertoast.showToast(
-        msg: "Please enable your location permission",
-      );
-      navigator.pop();
-      return cachedData ?? [];
-    }
 
     final city = widget.city;
     final keyword = ref.watch(_keywordProvider);
