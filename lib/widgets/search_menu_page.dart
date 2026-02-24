@@ -1,4 +1,5 @@
 import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nomnom_util/api/base_app_api.dart';
@@ -54,18 +55,18 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
   );
 
   // Cache providers to store previous results
-  // late final _cachedMenuProvider = StateProvider<List<MenuItem>?>(
-  //   (ref) => null,
-  // );
-  // late final _cachedStoreProvider = StateProvider<List<MerchantWithCity>?>(
-  //   (ref) => null,
-  // );
+  late final _cachedMenuProvider = StateProvider<List<MenuItem>?>(
+    (ref) => null,
+  );
+  late final _cachedStoreProvider = StateProvider<List<MerchantWithCity>?>(
+    (ref) => null,
+  );
   // late String keyword = widget.keyword ?? "";
   // late final T
   // List<Merchant> _merchantDisplay = [];
   late final dataProvider = FutureProvider<List<MenuItem>>((ref) async {
     // Return cached data immediately if available
-    // final cachedData = ref.read(_cachedMenuProvider);
+    final cachedData = ref.read(_cachedMenuProvider);
 
     if (widget.type == 2 ||
         (widget.type == 3 && widget.keyword != null) ||
@@ -78,17 +79,17 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
           ? 'search_menu_public_$key'
           : 'search_menu_${key}_${widget.merchantID ?? 'all'}';
 
-      // // Try to get cached data from prefs for immediate display
-      // final cachedString = widget.prefs.getCacheString(cacheKey);
-      // if (cachedString != null && cachedData == null) {
-      //   try {
-      //     final List cachedList = jsonDecode(cachedString) as List;
-      //     final cached = cachedList.map((e) => MenuItem.fromJson(e)).toList();
-      //     Future.microtask(
-      //       () => ref.read(_cachedMenuProvider.notifier).state = cached,
-      //     );
-      //   } catch (_) {}
-      // }
+      // Try to get cached data from prefs for immediate display
+      final cachedString = widget.prefs.getCacheString(cacheKey);
+      if (cachedString != null && cachedData == null) {
+        try {
+          final List cachedList = jsonDecode(cachedString) as List;
+          final cached = cachedList.map((e) => MenuItem.fromJson(e)).toList();
+          Future.microtask(
+            () => ref.read(_cachedMenuProvider.notifier).state = cached,
+          );
+        } catch (_) {}
+      }
 
       // Fetch fresh data
       List<MenuItem> freshData;
@@ -101,10 +102,10 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
         );
       }
 
-      // // Update cache with fresh data (deferred to avoid modifying providers while building)
-      // Future.microtask(
-      //   () => ref.read(_cachedMenuProvider.notifier).state = freshData,
-      // );
+      // Update cache with fresh data (deferred to avoid modifying providers while building)
+      Future.microtask(
+        () => ref.read(_cachedMenuProvider.notifier).state = freshData,
+      );
 
       // Update persistent cache
       await widget.prefs.setCacheString(
@@ -114,96 +115,95 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
 
       return freshData;
     }
-    return [];
+    return cachedData ?? [];
   });
+  late final storeProvider = FutureProvider<List<MerchantWithCity>>((
+    ref,
+  ) async {
+    // Return cached data immediately if available
+    final cachedData = ref.read(_cachedStoreProvider);
 
-  // late final storeProvider = FutureProvider<List<MerchantWithCity>>((
-  //   ref,
-  // ) async {
-  //   // Return cached data immediately if available
-  //   final cachedData = ref.read(_cachedStoreProvider);
+    if (widget.type == -1) {
+      final key = ref.watch(_keywordProvider);
 
-  //   if (widget.type == -1) {
-  //     final key = ref.watch(_keywordProvider);
+      final cacheKey = 'search_store_public_$key';
+      final cachedString = widget.prefs.getCacheString(cacheKey);
+      if (cachedString != null && cachedData == null) {
+        try {
+          final List cachedList = jsonDecode(cachedString) as List;
+          final cached = cachedList
+              .map((e) => MerchantWithCity.fromJson(e))
+              .toList();
+          ref.read(_cachedStoreProvider.notifier).state = cached;
+        } catch (_) {}
+      }
 
-  //     final cacheKey = 'search_store_public_$key';
-  //     final cachedString = widget.prefs.getCacheString(cacheKey);
-  //     if (cachedString != null && cachedData == null) {
-  //       try {
-  //         final List cachedList = jsonDecode(cachedString) as List;
-  //         final cached = cachedList
-  //             .map((e) => MerchantWithCity.fromJson(e))
-  //             .toList();
-  //         ref.read(_cachedStoreProvider.notifier).state = cached;
-  //       } catch (_) {}
-  //     }
+      final freshData = await widget.api.publicSearch(
+        serviceID: 0,
+        keyword: key,
+      );
+      ref.read(_cachedStoreProvider.notifier).state = freshData;
 
-  //     final freshData = await widget.api.publicSearch(
-  //       serviceID: 0,
-  //       keyword: key,
-  //     );
-  //     ref.read(_cachedStoreProvider.notifier).state = freshData;
+      // Update persistent cache
+      await widget.prefs.setCacheString(
+        cacheKey,
+        jsonEncode(freshData.map((e) => e.toJson()).toList()),
+      );
 
-  //     // Update persistent cache
-  //     await widget.prefs.setCacheString(
-  //       cacheKey,
-  //       jsonEncode(freshData.map((e) => e.toJson()).toList()),
-  //     );
+      return freshData;
+    }
 
-  //     return freshData;
-  //   }
+    final city = widget.city;
+    final keyword = ref.watch(_keywordProvider);
+    final cacheKey = widget.classification != null && widget.type == 1
+        ? 'search_store_class_${widget.classification!.id}_$city'
+        : 'search_store_${keyword}_$city';
 
-  //   final city = widget.city;
-  //   final keyword = ref.watch(_keywordProvider);
-  //   final cacheKey = widget.classification != null && widget.type == 1
-  //       ? 'search_store_class_${widget.classification!.id}_$city'
-  //       : 'search_store_${keyword}_$city';
+    // Try to get cached data from prefs for immediate display
+    final cachedString = widget.prefs.getCacheString(cacheKey);
+    if (cachedString != null && cachedData == null) {
+      try {
+        final List cachedList = jsonDecode(cachedString) as List;
+        final cached = cachedList
+            .map((e) => MerchantWithCity.fromJson(e))
+            .toList();
+        Future.microtask(
+          () => ref.read(_cachedStoreProvider.notifier).state = cached,
+        );
+      } catch (_) {}
+    }
 
-  //   // Try to get cached data from prefs for immediate display
-  //   final cachedString = widget.prefs.getCacheString(cacheKey);
-  //   if (cachedString != null && cachedData == null) {
-  //     try {
-  //       final List cachedList = jsonDecode(cachedString) as List;
-  //       final cached = cachedList
-  //           .map((e) => MerchantWithCity.fromJson(e))
-  //           .toList();
-  //       Future.microtask(
-  //         () => ref.read(_cachedStoreProvider.notifier).state = cached,
-  //       );
-  //     } catch (_) {}
-  //   }
+    // Fetch fresh data
+    List<MerchantWithCity> freshData;
+    if (widget.classification != null && widget.type == 1) {
+      if (widget.classification!.id == 1) {
+        freshData = await widget.appApi.fastfood(city);
+      } else {
+        freshData = await widget.appApi.searchByClass(
+          widget.classification!.id,
+        );
+      }
+    } else {
+      freshData = await widget.api.search(
+        keyword: keyword,
+        city: city,
+        serviceID: 0,
+      );
+    }
 
-  //   // Fetch fresh data
-  //   List<MerchantWithCity> freshData;
-  //   if (widget.classification != null && widget.type == 1) {
-  //     if (widget.classification!.id == 1) {
-  //       freshData = await widget.appApi.fastfood(city);
-  //     } else {
-  //       freshData = await widget.appApi.searchByClass(
-  //         widget.classification!.id,
-  //       );
-  //     }
-  //   } else {
-  //     freshData = await widget.api.search(
-  //       keyword: keyword,
-  //       city: city,
-  //       serviceID: 0,
-  //     );
-  //   }
+    // Update cache with fresh data (deferred to avoid modifying providers while building)
+    Future.microtask(
+      () => ref.read(_cachedStoreProvider.notifier).state = freshData,
+    );
 
-  //   // Update cache with fresh data (deferred to avoid modifying providers while building)
-  //   Future.microtask(
-  //     () => ref.read(_cachedStoreProvider.notifier).state = freshData,
-  //   );
+    // Update persistent cache
+    await widget.prefs.setCacheString(
+      cacheKey,
+      jsonEncode(freshData.map((e) => e.toJson()).toList()),
+    );
 
-  //   // Update persistent cache
-  //   await widget.prefs.setCacheString(
-  //     cacheKey,
-  //     jsonEncode(freshData.map((e) => e.toJson()).toList()),
-  //   );
-
-  //   return freshData;
-  // });
+    return freshData;
+  });
 
   @override
   void initState() {
@@ -233,7 +233,7 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
   Widget build(BuildContext context) {
     final keyword = ref.watch(_keywordProvider);
     final menu = ref.watch(dataProvider);
-    // final store = ref.watch(storeProvider);
+    final store = ref.watch(storeProvider);
     // final menu = ref.watch(dataProvider);
     final Size size = MediaQuery.sizeOf(context);
     return GestureDetector(
@@ -254,7 +254,7 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
               child: DebouncedTextField(
                 onDebouncedChange: (text) {
                   ref.read(_keywordProvider.notifier).update((r) => text);
-                  // ref.invalidate(storeProvider);
+                  ref.invalidate(storeProvider);
                 },
                 hintText: "Search",
                 labelText: "Search",
@@ -268,7 +268,9 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
           child: Column(
             children: [
               // Show loader when both are loading
-              if ((widget.type == 1 || widget.type == 3) && menu.isLoading) ...{
+              if ((widget.type == 1 || widget.type == 3) &&
+                  menu.isLoading &&
+                  store.isLoading) ...{
                 SizedBox(
                   height: size.height * .4,
                   child: Center(child: CircularProgressIndicator.adaptive()),
@@ -293,27 +295,29 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
                         Center(child: CircularProgressIndicator.adaptive()),
                   ),
                 },
-                // if (widget.type != 2) ...{
-                //   store.when(
-                //     data: (storeData) {
-                //       if (storeData.isEmpty) {
-                //         return Container();
-                //       }
-                //       return BuildSearchByStore(
-                //         dataProvider: storeProvider,
-                //         isWholePage: true,
-                //         ffs: widget.ffs,
-                //       );
-                //     },
-                //     error: (_, s) => Container(),
-                //     loading: () =>
-                //         Center(child: CircularProgressIndicator.adaptive()),
-                //   ),
-                // },
+                if (widget.type != 2) ...{
+                  store.when(
+                    data: (storeData) {
+                      if (storeData.isEmpty) {
+                        return Container();
+                      }
+                      return BuildSearchByStore(
+                        dataProvider: storeProvider,
+                        isWholePage: true,
+                        ffs: widget.ffs,
+                      );
+                    },
+                    error: (_, s) => Container(),
+                    loading: () =>
+                        Center(child: CircularProgressIndicator.adaptive()),
+                  ),
+                },
                 // Show empty state only when both menu and store are empty
                 if ((widget.type == 1 || widget.type == 3) &&
                     menu.hasValue &&
-                    (menu.value?.isEmpty ?? true)) ...{
+                    store.hasValue &&
+                    (menu.value?.isEmpty ?? true) &&
+                    (store.value?.isEmpty ?? true)) ...{
                   SizedBox(
                     height: size.height * .4,
                     child: Center(child: Text("No restaurant or menu found")),
