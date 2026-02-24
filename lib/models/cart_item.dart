@@ -64,7 +64,7 @@ class CartItem {
       isSelected: false,
       menuId: json['menuId'],
       menuName: json['menuName'],
-      photoUrl: json['photoUrl'],
+      photoUrl: json['photoUrl'] ?? "",
       quantity: json['quantity'],
       quantityLimit:
           int.tryParse(json['quantity_limit']?.toString() ?? '0') ?? 0,
