@@ -54,18 +54,18 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
   );
 
   // Cache providers to store previous results
-  late final _cachedMenuProvider = StateProvider<List<MenuItem>?>(
-    (ref) => null,
-  );
-  late final _cachedStoreProvider = StateProvider<List<MerchantWithCity>?>(
-    (ref) => null,
-  );
+  // late final _cachedMenuProvider = StateProvider<List<MenuItem>?>(
+  //   (ref) => null,
+  // );
+  // late final _cachedStoreProvider = StateProvider<List<MerchantWithCity>?>(
+  //   (ref) => null,
+  // );
   // late String keyword = widget.keyword ?? "";
   // late final T
   // List<Merchant> _merchantDisplay = [];
   late final dataProvider = FutureProvider<List<MenuItem>>((ref) async {
     // Return cached data immediately if available
-    final cachedData = ref.read(_cachedMenuProvider);
+    // final cachedData = ref.read(_cachedMenuProvider);
 
     if (widget.type == 2 ||
         (widget.type == 3 && widget.keyword != null) ||
@@ -78,17 +78,17 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
           ? 'search_menu_public_$key'
           : 'search_menu_${key}_${widget.merchantID ?? 'all'}';
 
-      // Try to get cached data from prefs for immediate display
-      final cachedString = widget.prefs.getCacheString(cacheKey);
-      if (cachedString != null && cachedData == null) {
-        try {
-          final List cachedList = jsonDecode(cachedString) as List;
-          final cached = cachedList.map((e) => MenuItem.fromJson(e)).toList();
-          Future.microtask(
-            () => ref.read(_cachedMenuProvider.notifier).state = cached,
-          );
-        } catch (_) {}
-      }
+      // // Try to get cached data from prefs for immediate display
+      // final cachedString = widget.prefs.getCacheString(cacheKey);
+      // if (cachedString != null && cachedData == null) {
+      //   try {
+      //     final List cachedList = jsonDecode(cachedString) as List;
+      //     final cached = cachedList.map((e) => MenuItem.fromJson(e)).toList();
+      //     Future.microtask(
+      //       () => ref.read(_cachedMenuProvider.notifier).state = cached,
+      //     );
+      //   } catch (_) {}
+      // }
 
       // Fetch fresh data
       List<MenuItem> freshData;
@@ -101,10 +101,10 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
         );
       }
 
-      // Update cache with fresh data (deferred to avoid modifying providers while building)
-      Future.microtask(
-        () => ref.read(_cachedMenuProvider.notifier).state = freshData,
-      );
+      // // Update cache with fresh data (deferred to avoid modifying providers while building)
+      // Future.microtask(
+      //   () => ref.read(_cachedMenuProvider.notifier).state = freshData,
+      // );
 
       // Update persistent cache
       await widget.prefs.setCacheString(
@@ -114,7 +114,7 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
 
       return freshData;
     }
-    return cachedData ?? [];
+    return [];
   });
 
   // late final storeProvider = FutureProvider<List<MerchantWithCity>>((
