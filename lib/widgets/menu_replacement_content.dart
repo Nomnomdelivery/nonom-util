@@ -142,7 +142,7 @@ class _MenuReplacementContentState extends ConsumerState<MenuReplacementContent>
                       builder: (_) => SearchMenuPage(
                         keyword: "",
                         classification: null,
-                        type: 2,
+                        type: 1,
                         merchantID: widget.merchantId,
                         api: widget.api,
                         appApi: widget.appApi,
