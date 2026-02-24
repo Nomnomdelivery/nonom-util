@@ -36,6 +36,7 @@ void showMenuReplacementBottomSheet({
   required StateNotifierProvider<CurrentLocationNotifier, UserAddress?>
   currentLocationProvider,
   required BaseDataCacher prefs,
+  required String city,
 }) {
   showModalBottomSheet(
     context: context,
@@ -106,6 +107,7 @@ void showMenuReplacementBottomSheet({
                 currentUserProvider: currentUserProvider,
                 appApi: appApi,
                 prefs: prefs,
+                city: city,
               ),
             ),
           ],

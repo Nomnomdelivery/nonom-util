@@ -38,6 +38,7 @@ class MenuReplacementContent extends ConsumerStatefulWidget {
     required this.currentUserProvider,
     required this.appApi,
     required this.prefs,
+    required this.city,
   });
 
   final int merchantId;
@@ -58,6 +59,7 @@ class MenuReplacementContent extends ConsumerStatefulWidget {
   currentUserProvider;
   final BaseAppApi appApi;
   final BaseDataCacher prefs;
+  final String city;
 
   @override
   ConsumerState<MenuReplacementContent> createState() =>
@@ -148,6 +150,7 @@ class _MenuReplacementContentState extends ConsumerState<MenuReplacementContent>
                         currentLocationProvider: widget.currentLocationProvider,
                         areaSettingsProvider: widget.areaSettingsProvider,
                         ffs: widget.firestore,
+                        city: widget.city,
                       ),
                     ),
                   );

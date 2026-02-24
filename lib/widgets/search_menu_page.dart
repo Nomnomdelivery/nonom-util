@@ -15,7 +15,6 @@ import 'package:nomnom_util/models/merchant/merchant_with_city.dart';
 import 'package:nomnom_util/models/user_address.dart';
 import 'package:nomnom_util/providers/user_provider.dart';
 import 'package:nomnom_util/utils/color_pallete.dart';
-import 'package:nomnom_util/widgets/build_search_by_menu.dart';
 import 'package:nomnom_util/widgets/debounce_text_field.dart';
 import 'package:nomnom_util/widgets/search_by_store.dart';
 
@@ -32,6 +31,7 @@ class SearchMenuPage extends ConsumerStatefulWidget {
     required this.currentLocationProvider,
     required this.areaSettingsProvider,
     required this.ffs,
+    required this.city,
   });
   final RawCategory? classification;
   final int type;
@@ -44,6 +44,7 @@ class SearchMenuPage extends ConsumerStatefulWidget {
   currentLocationProvider;
   final StateProvider<AreaSetting?> areaSettingsProvider;
   final BaseFirebaseFirestoreSupport ffs;
+  final String city;
   @override
   ConsumerState<SearchMenuPage> createState() => _SearchMenuPageState();
 }
@@ -162,7 +163,7 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
       return cachedData ?? [];
     }
 
-    final city = currentLocation.city.toLowerCase().replaceAll("city", "");
+    final city = widget.city;
     final keyword = ref.watch(_keywordProvider);
     final cacheKey = widget.classification != null && widget.type == 1
         ? 'search_store_class_${widget.classification!.id}_$city'
