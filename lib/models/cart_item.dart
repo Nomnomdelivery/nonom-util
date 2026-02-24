@@ -106,7 +106,7 @@ class CartItem {
       menuId: int.parse(json['menu_item_id'].toString()),
       description: json['description'],
       menuName: json['name'],
-      photoUrl: json['photo_url'],
+      photoUrl: json['photo_url'] ?? "",
       quantity: int.parse(json['quantity'].toString()),
       quantityLimit:
           int.tryParse(menuItemData['quantity_limit']?.toString() ?? '0') ?? 0,
