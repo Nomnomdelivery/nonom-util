@@ -909,6 +909,10 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                               data == null || !data.isAvailable
                                               ? null
                                               : () async {
+                                                  setState(() {
+                                                    debugPrint("loading true");
+                                                    loading = true;
+                                                  });
                                                   final navigator =
                                                       Navigator.of(context);
 
@@ -949,6 +953,8 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                                       "Successfully replace item: $isSuccess",
                                                     );
 
+                                                    loading = false;
+
                                                     if (isSuccess) {
                                                       if (mounted) {
                                                         navigator.pop();
@@ -978,6 +984,9 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                                           _addToBagButtonKey,
                                                       onComplete: () async {
                                                         setState(() {
+                                                          debugPrint(
+                                                            "loading true",
+                                                          );
                                                           loading = true;
                                                         });
                                                         final navigator =
