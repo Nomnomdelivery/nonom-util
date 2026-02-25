@@ -57,8 +57,12 @@ class DeliveryModel {
   final int riderRejections;
   final UnavailableAction unavailableAction;
   final List<int> candidates;
+  final double finalBalance;
+  final double initialPaid;
 
   DeliveryModel({
+    required this.finalBalance,
+    required this.initialPaid,
     required this.candidates,
     required this.unavailableAction,
     required this.riderRejections,
@@ -118,6 +122,8 @@ class DeliveryModel {
     }
 
     return DeliveryModel(
+      initialPaid: (data['initial_paid'] ?? 0).toDouble(),
+      finalBalance: (data['final_balance'] ?? 0).toDouble(),
       usedCoins: (data['used_nomnom_coins'] ?? 0).toDouble(),
       orderRating: data['order_rating'] == null
           ? FireOrderRating()
