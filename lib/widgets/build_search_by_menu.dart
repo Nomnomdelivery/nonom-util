@@ -14,6 +14,7 @@ import 'package:nomnom_util/extensions/num_currency_format.dart';
 import 'package:nomnom_util/extensions/string_capitalize.dart';
 import 'package:nomnom_util/models/area_setting.dart';
 import 'package:nomnom_util/models/cart.dart';
+import 'package:nomnom_util/models/cart_item.dart';
 import 'package:nomnom_util/models/menu/menu_item.dart';
 import 'package:nomnom_util/models/user_address.dart';
 import 'package:nomnom_util/models/user_model.dart';
@@ -37,6 +38,8 @@ class BuildSearchByMenu extends StatelessWidget {
     required this.api,
     required this.appApi,
     required this.prefs,
+    required this.orderId,
+    required this.originalCartItem,
   });
   final FutureProvider<List<MenuItem>> dataProvider;
   final StateProvider<AreaSetting?> areaSettingsProvider;
@@ -52,6 +55,8 @@ class BuildSearchByMenu extends StatelessWidget {
   currentLocationProvider;
   final BaseAppApi appApi;
   final BaseDataCacher prefs;
+  final String orderId;
+  final CartItem originalCartItem;
 
   @override
   Widget build(BuildContext context) {
@@ -72,11 +77,10 @@ class BuildSearchByMenu extends StatelessWidget {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    //TODO: fix image
-                    // Image.asset(
-                    //   "packages/nomnom_util/assets/images/rider.png",
-                    //   height: 100,
-                    // ),
+                    Image.asset(
+                      "packages/nomnom_util/assets/images/rider.png",
+                      height: 100,
+                    ),
                     const Gap(20),
                     Text("No result found"),
                   ],
@@ -112,6 +116,8 @@ class BuildSearchByMenu extends StatelessWidget {
                           currentLocationProvider: currentLocationProvider,
                           appApi: appApi,
                           prefs: prefs,
+                          originalCartItem: originalCartItem,
+                          orderId: orderId,
                           isReplacement: true,
                         ),
                       ),

@@ -7,6 +7,7 @@ import 'package:nomnom_util/api/base_firebase_firestore_support.dart';
 import 'package:nomnom_util/api/base_store_api.dart';
 import 'package:nomnom_util/models/area_setting.dart';
 import 'package:nomnom_util/models/cart.dart';
+import 'package:nomnom_util/models/cart_item.dart';
 import 'package:nomnom_util/models/menu/menu_item.dart';
 import 'package:nomnom_util/models/menu/raw_category.dart';
 import 'package:nomnom_util/models/user_address.dart';
@@ -34,6 +35,8 @@ class SearchMenuPage extends ConsumerStatefulWidget {
     required this.cartApi,
     required this.currentUserCartProvider,
     required this.currentUserProvider,
+    required this.originalCartItem,
+    required this.orderId,
   });
   final RawCategory? classification;
   final int type;
@@ -52,6 +55,8 @@ class SearchMenuPage extends ConsumerStatefulWidget {
   currentUserCartProvider;
   final StateNotifierProvider<CurrentUserNotifier, UserModel?>
   currentUserProvider;
+  final String orderId;
+  final CartItem originalCartItem;
 
   @override
   ConsumerState<SearchMenuPage> createState() => _SearchMenuPageState();
@@ -291,6 +296,8 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
                         api: widget.api,
                         appApi: widget.appApi,
                         prefs: widget.prefs,
+                        orderId: widget.orderId,
+                        originalCartItem: widget.originalCartItem,
                       );
                     },
                     error: (_, s) => Container(),

@@ -154,6 +154,8 @@ class _MenuReplacementContentState extends ConsumerState<MenuReplacementContent>
                         cartApi: widget.cartApi,
                         currentUserCartProvider: widget.currentUserCartProvider,
                         currentUserProvider: widget.currentUserProvider,
+                        orderId: widget.orderId!,
+                        originalCartItem: widget.itemToReplace,
                       ),
                     ),
                   );
