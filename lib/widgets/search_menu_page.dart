@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nomnom_util/api/base_app_api.dart';
@@ -7,12 +5,10 @@ import 'package:nomnom_util/api/base_cart_api.dart';
 import 'package:nomnom_util/api/base_data_cacher.dart';
 import 'package:nomnom_util/api/base_firebase_firestore_support.dart';
 import 'package:nomnom_util/api/base_store_api.dart';
-import 'package:nomnom_util/extensions/string_capitalize.dart';
 import 'package:nomnom_util/models/area_setting.dart';
 import 'package:nomnom_util/models/cart.dart';
 import 'package:nomnom_util/models/menu/menu_item.dart';
 import 'package:nomnom_util/models/menu/raw_category.dart';
-import 'package:nomnom_util/models/merchant/merchant_with_city.dart';
 import 'package:nomnom_util/models/user_address.dart';
 import 'package:nomnom_util/models/user_model.dart';
 import 'package:nomnom_util/providers/cart.dart';
@@ -20,7 +16,6 @@ import 'package:nomnom_util/providers/user_provider.dart';
 import 'package:nomnom_util/utils/color_pallete.dart';
 import 'package:nomnom_util/widgets/build_search_by_menu.dart';
 import 'package:nomnom_util/widgets/debounce_text_field.dart';
-import 'package:nomnom_util/widgets/search_by_store.dart';
 
 class SearchMenuPage extends ConsumerStatefulWidget {
   const SearchMenuPage({
@@ -225,18 +220,6 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
     super.initState();
   }
 
-  String title() {
-    if (widget.classification == null && widget.type == 2) {
-      return "Menu";
-    } else if (widget.classification != null) {
-      return widget.classification!.name.capitalize();
-    } else if (widget.type == 3) {
-      return "";
-    } else {
-      return "Restaurants";
-    }
-  }
-
   bool showTextfield() {
     return widget.keyword != null &&
         widget.classification == null &&
@@ -258,7 +241,7 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
           backgroundColor: ColorPalette.sscaffoldColor,
           surfaceTintColor: ColorPalette.sscaffoldColor,
           title: Text(
-            "Search ${title()}",
+            "Search Menu}",
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           ),
           bottom: PreferredSize(
