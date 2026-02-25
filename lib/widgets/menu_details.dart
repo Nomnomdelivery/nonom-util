@@ -562,6 +562,7 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
         children: [
           Positioned.fill(
             child: Scaffold(
+              backgroundColor: Colors.white,
               body: Column(
                 children: [
                   Expanded(
