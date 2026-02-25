@@ -45,6 +45,7 @@ class MenuDetails extends ConsumerStatefulWidget {
     this.originalCartItem,
     this.replacementIndex,
     this.orderId,
+    this.fromSearch = false,
     required this.api,
     required this.currentUserCartProvider,
     required this.currentUserProvider,
@@ -73,6 +74,8 @@ class MenuDetails extends ConsumerStatefulWidget {
   currentLocationProvider;
   final BaseAppApi appApi;
   final BaseDataCacher prefs;
+  final bool fromSearch;
+
   @override
   ConsumerState<MenuDetails> createState() => _MenuDetailsState();
 }
@@ -943,6 +946,9 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                                     );
 
                                                     if (mounted) {
+                                                      navigator.pop();
+                                                    }
+                                                    if (widget.fromSearch) {
                                                       navigator.pop();
                                                     }
                                                   } else {

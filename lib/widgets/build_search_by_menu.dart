@@ -119,6 +119,7 @@ class BuildSearchByMenu extends StatelessWidget {
                           originalCartItem: originalCartItem,
                           orderId: orderId,
                           isReplacement: true,
+                          fromSearch: true,
                         ),
                       ),
                     );
