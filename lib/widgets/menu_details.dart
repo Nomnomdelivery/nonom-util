@@ -542,6 +542,8 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
     Fluttertoast.showToast(msg: message, gravity: ToastGravity.CENTER);
   }
 
+  bool loading = false;
+
   String get _successMessage => widget.isReplacement
       ? "Item replaced successfully"
       : "Cart updated successfully";
@@ -974,13 +976,16 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                                           _cartButtonKey,
                                                       sourceKey:
                                                           _addToBagButtonKey,
-                                                      onComplete: () {
+                                                      onComplete: () async {
+                                                        setState(() {
+                                                          loading = true;
+                                                        });
                                                         final navigator =
                                                             Navigator.of(
                                                               context,
                                                             );
 
-                                                        addToCart(
+                                                        await addToCart(
                                                           markUpRate:
                                                               markUpRate,
                                                           variants:
@@ -998,9 +1003,15 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                                           debugPrint(
                                                             "Successfully added to cart: $isSuccess",
                                                           );
+                                                          loading = false;
 
                                                           if (!mounted) return;
                                                           navigator.pop();
+
+                                                          if (widget
+                                                              .fromSearch) {
+                                                            navigator.pop();
+                                                          }
                                                         });
                                                       },
                                                     );
@@ -1008,7 +1019,9 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                                 },
                                           color: orangePalette,
                                           child: Center(
-                                            child: data!.isAvailable
+                                            child: loading
+                                                ? CircularProgressIndicator.adaptive()
+                                                : data!.isAvailable
                                                 ? Text(
                                                     widget.isReplacement
                                                         ? "Replace Item"
