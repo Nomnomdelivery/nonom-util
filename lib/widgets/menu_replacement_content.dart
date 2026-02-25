@@ -151,6 +151,9 @@ class _MenuReplacementContentState extends ConsumerState<MenuReplacementContent>
                         areaSettingsProvider: widget.areaSettingsProvider,
                         ffs: widget.firestore,
                         city: widget.city,
+                        cartApi: widget.cartApi,
+                        currentUserCartProvider: widget.currentUserCartProvider,
+                        currentUserProvider: widget.currentUserProvider,
                       ),
                     ),
                   );

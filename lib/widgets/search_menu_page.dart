@@ -3,17 +3,22 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:nomnom_util/api/base_app_api.dart';
+import 'package:nomnom_util/api/base_cart_api.dart';
 import 'package:nomnom_util/api/base_data_cacher.dart';
 import 'package:nomnom_util/api/base_firebase_firestore_support.dart';
 import 'package:nomnom_util/api/base_store_api.dart';
 import 'package:nomnom_util/extensions/string_capitalize.dart';
 import 'package:nomnom_util/models/area_setting.dart';
+import 'package:nomnom_util/models/cart.dart';
 import 'package:nomnom_util/models/menu/menu_item.dart';
 import 'package:nomnom_util/models/menu/raw_category.dart';
 import 'package:nomnom_util/models/merchant/merchant_with_city.dart';
 import 'package:nomnom_util/models/user_address.dart';
+import 'package:nomnom_util/models/user_model.dart';
+import 'package:nomnom_util/providers/cart.dart';
 import 'package:nomnom_util/providers/user_provider.dart';
 import 'package:nomnom_util/utils/color_pallete.dart';
+import 'package:nomnom_util/widgets/build_search_by_menu.dart';
 import 'package:nomnom_util/widgets/debounce_text_field.dart';
 import 'package:nomnom_util/widgets/search_by_store.dart';
 
@@ -31,6 +36,9 @@ class SearchMenuPage extends ConsumerStatefulWidget {
     required this.areaSettingsProvider,
     required this.ffs,
     required this.city,
+    required this.cartApi,
+    required this.currentUserCartProvider,
+    required this.currentUserProvider,
   });
   final RawCategory? classification;
   final int type;
@@ -44,134 +52,141 @@ class SearchMenuPage extends ConsumerStatefulWidget {
   final StateProvider<AreaSetting?> areaSettingsProvider;
   final BaseFirebaseFirestoreSupport ffs;
   final String city;
+  final BaseCartApi cartApi;
+  final StateNotifierProvider<CurrentUserCartNotifier, List<CartModel>>
+  currentUserCartProvider;
+  final StateNotifierProvider<CurrentUserNotifier, UserModel?>
+  currentUserProvider;
+
   @override
   ConsumerState<SearchMenuPage> createState() => _SearchMenuPageState();
 }
 
 class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
     with ColorPalette {
-  late final _keywordProvider = StateProvider<String>(
-    (ref) => widget.keyword ?? "",
-  );
+  // late final _keywordProvider = StateProvider<String>(
+  //   (ref) => widget.keyword ?? "",
+  // );
 
   // Cache providers to store previous results
-  late final _cachedMenuProvider = StateProvider<List<MenuItem>?>(
-    (ref) => null,
-  );
-  late final _cachedStoreProvider = StateProvider<List<MerchantWithCity>?>(
-    (ref) => null,
-  );
+  // late final _cachedMenuProvider = StateProvider<List<MenuItem>?>(
+  //   (ref) => null,
+  // );
+  // late final _cachedStoreProvider = StateProvider<List<MerchantWithCity>?>(
+  //   (ref) => null,
+  // );
   // late String keyword = widget.keyword ?? "";
   // late final T
   // List<Merchant> _merchantDisplay = [];
+  String keyword = "";
   late final dataProvider = FutureProvider<List<MenuItem>>((ref) async {
     // Return cached data immediately if available
-    final cachedData = ref.read(_cachedMenuProvider);
+    // final cachedData = ref.read(_cachedMenuProvider);
 
     if (widget.type == 2 ||
         (widget.type == 3 && widget.keyword != null) ||
         widget.type == -1) {
-      final key = ref.watch(_keywordProvider);
+      // final key = ref.watch(_keywordProvider);
 
       // Setup cache key for persistent storage
 
-      final cacheKey = widget.type == -1
-          ? 'search_menu_public_$key'
-          : 'search_menu_${key}_${widget.merchantID ?? 'all'}';
+      // final cacheKey = widget.type == -1
+      //     ? 'search_menu_public_$key'
+      //     : 'search_menu_${key}_${widget.merchantID ?? 'all'}';
 
       // Try to get cached data from prefs for immediate display
-      final cachedString = widget.prefs.getCacheString(cacheKey);
-      if (cachedString != null && cachedData == null) {
-        try {
-          final List cachedList = jsonDecode(cachedString) as List;
-          final cached = cachedList.map((e) => MenuItem.fromJson(e)).toList();
-          Future.microtask(
-            () => ref.read(_cachedMenuProvider.notifier).state = cached,
-          );
-        } catch (_) {}
-      }
+      // final cachedString = widget.prefs.getCacheString(cacheKey);
+      // if (cachedString != null && cachedData == null) {
+      //   try {
+      //     final List cachedList = jsonDecode(cachedString) as List;
+      //     final cached = cachedList.map((e) => MenuItem.fromJson(e)).toList();
+      //     Future.microtask(
+      //       () => ref.read(_cachedMenuProvider.notifier).state = cached,
+      //     );
+      //   } catch (_) {}
+      // }
 
       // Fetch fresh data
       List<MenuItem> freshData;
       if (widget.type == -1) {
-        freshData = await widget.api.publicSearchMenu(keyword: key);
+        freshData = await widget.api.publicSearchMenu(keyword: keyword);
       } else {
         freshData = await widget.api.searchMenu(
-          keyword: key,
+          keyword: keyword,
           merchantID: widget.merchantID,
         );
       }
 
       // Update cache with fresh data (deferred to avoid modifying providers while building)
-      Future.microtask(
-        () => ref.read(_cachedMenuProvider.notifier).state = freshData,
-      );
+      // Future.microtask(
+      //   () => ref.read(_cachedMenuProvider.notifier).state = freshData,
+      // );
 
-      // Update persistent cache
-      await widget.prefs.setCacheString(
-        cacheKey,
-        jsonEncode(freshData.map((e) => e.toJson()).toList()),
-      );
+      // // Update persistent cache
+      // await widget.prefs.setCacheString(
+      //   cacheKey,
+      //   jsonEncode(freshData.map((e) => e.toJson()).toList()),
+      // );
 
       return freshData;
     }
-    return cachedData ?? [];
+    return [];
   });
+
   late final storeProvider = FutureProvider<List<MerchantWithCity>>((
     ref,
   ) async {
     // Return cached data immediately if available
-    final cachedData = ref.read(_cachedStoreProvider);
+    // final cachedData = ref.read(_cachedStoreProvider);
 
     if (widget.type == -1) {
-      final key = ref.watch(_keywordProvider);
+      // final key = ref.watch(_keywordProvider);
 
-      final cacheKey = 'search_store_public_$key';
-      final cachedString = widget.prefs.getCacheString(cacheKey);
-      if (cachedString != null && cachedData == null) {
-        try {
-          final List cachedList = jsonDecode(cachedString) as List;
-          final cached = cachedList
-              .map((e) => MerchantWithCity.fromJson(e))
-              .toList();
-          ref.read(_cachedStoreProvider.notifier).state = cached;
-        } catch (_) {}
-      }
+      // final cacheKey = 'search_store_public_$key';
+      // final cachedString = widget.prefs.getCacheString(cacheKey);
+      // if (cachedString != null && cachedData == null) {
+      //   try {
+      //     final List cachedList = jsonDecode(cachedString) as List;
+      //     final cached = cachedList
+      //         .map((e) => MerchantWithCity.fromJson(e))
+      //         .toList();
+      //     ref.read(_cachedStoreProvider.notifier).state = cached;
+      //   } catch (_) {}
+      // }
 
       final freshData = await widget.api.publicSearch(
         serviceID: 0,
-        keyword: key,
+        keyword: keyword,
       );
-      ref.read(_cachedStoreProvider.notifier).state = freshData;
+      // ref.read(_cachedStoreProvider.notifier).state = freshData;
 
       // Update persistent cache
-      await widget.prefs.setCacheString(
-        cacheKey,
-        jsonEncode(freshData.map((e) => e.toJson()).toList()),
-      );
+      // await widget.prefs.setCacheString(
+      //   cacheKey,
+      //   jsonEncode(freshData.map((e) => e.toJson()).toList()),
+      // );
 
       return freshData;
     }
 
     final city = widget.city;
-    final keyword = ref.watch(_keywordProvider);
     final cacheKey = widget.classification != null && widget.type == 1
         ? 'search_store_class_${widget.classification!.id}_$city'
         : 'search_store_${keyword}_$city';
 
     // Try to get cached data from prefs for immediate display
-    final cachedString = widget.prefs.getCacheString(cacheKey);
-    if (cachedString != null && cachedData == null) {
-      try {
-        final List cachedList = jsonDecode(cachedString) as List;
-        final cached = cachedList
-            .map((e) => MerchantWithCity.fromJson(e))
-            .toList();
-        Future.microtask(
-          () => ref.read(_cachedStoreProvider.notifier).state = cached,
-        );
-      } catch (_) {}
-    }
+    // final cachedString = widget.prefs.getCacheString(cacheKey);
+    // if (cachedString != null && cachedData == null) {
+    //   try {
+    //     final List cachedList = jsonDecode(cachedString) as List;
+    //     final cached = cachedList
+    //         .map((e) => MerchantWithCity.fromJson(e))
+    //         .toList();
+    //     Future.microtask(
+    //       () => ref.read(_cachedStoreProvider.notifier).state = cached,
+    //     );
+    //   } catch (_) {}
+    // }
 
     // Fetch fresh data
     List<MerchantWithCity> freshData;
@@ -192,9 +207,9 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
     }
 
     // Update cache with fresh data (deferred to avoid modifying providers while building)
-    Future.microtask(
-      () => ref.read(_cachedStoreProvider.notifier).state = freshData,
-    );
+    // Future.microtask(
+    //   () => ref.read(_cachedStoreProvider.notifier).state = freshData,
+    // );
 
     // Update persistent cache
     await widget.prefs.setCacheString(
@@ -231,7 +246,7 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
 
   @override
   Widget build(BuildContext context) {
-    final keyword = ref.watch(_keywordProvider);
+    // final keyword = ref.watch(_keywordProvider);
     final menu = ref.watch(dataProvider);
     final store = ref.watch(storeProvider);
     // final menu = ref.watch(dataProvider);
@@ -253,7 +268,9 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               child: DebouncedTextField(
                 onDebouncedChange: (text) {
-                  ref.read(_keywordProvider.notifier).update((r) => text);
+                  setState(() {
+                    keyword = text;
+                  });
                   ref.invalidate(storeProvider);
                 },
                 hintText: "Search",
@@ -277,18 +294,24 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
                 ),
               } else ...{
                 if (widget.type != 1) ...{
-                  // Text("MENU"),
                   menu.when(
                     data: (menuData) {
                       if (menuData.isEmpty) {
                         return Container();
                       }
-                      // return BuildSearchByMenu(
-                      //   dataProvider: dataProvider,
-                      //   isWholePage: true,
-                      //   areaSettingsProvider: widget.areaSettingsProvider,
-                      // );
-                      return Container();
+                      return BuildSearchByMenu(
+                        dataProvider: dataProvider,
+                        isWholePage: true,
+                        areaSettingsProvider: widget.areaSettingsProvider,
+                        firestore: widget.ffs,
+                        currentLocationProvider: widget.currentLocationProvider,
+                        cartApi: widget.cartApi,
+                        currentUserCartProvider: widget.currentUserCartProvider,
+                        currentUserProvider: widget.currentUserProvider,
+                        api: widget.api,
+                        appApi: widget.appApi,
+                        prefs: widget.prefs,
+                      );
                     },
                     error: (_, s) => Container(),
                     loading: () =>
