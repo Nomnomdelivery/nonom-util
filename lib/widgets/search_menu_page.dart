@@ -109,14 +109,13 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
       // Fetch fresh data
       List<MenuItem> freshData;
       if (widget.type == -1) {
-        freshData = await widget.api.publicSearchMenu(keyword: keyword);
-      } else {
         freshData = await widget.api.searchMenu(
           keyword: keyword,
           merchantID: widget.merchantID,
         );
+      } else {
+        freshData = [];
       }
-
       // Update cache with fresh data (deferred to avoid modifying providers while building)
       // Future.microtask(
       //   () => ref.read(_cachedMenuProvider.notifier).state = freshData,
@@ -271,7 +270,7 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
                   setState(() {
                     keyword = text;
                   });
-                  // ref.invalidate(storeProvider);
+                  ref.invalidate(dataProvider);
                 },
                 hintText: "Search",
                 labelText: "Search",
@@ -334,14 +333,14 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
                 //   ),
                 // },
                 // Show empty state only when both menu and store are empty
-                if ((widget.type == 1 || widget.type == 3) &&
-                    menu.hasValue &&
-                    (menu.value?.isEmpty ?? true)) ...{
-                  SizedBox(
-                    height: size.height * .4,
-                    child: Center(child: Text("No restaurant or menu found")),
-                  ),
-                },
+                // if ((widget.type == 1 || widget.type == 3) &&
+                //     menu.hasValue &&
+                //     (menu.value?.isEmpty ?? true)) ...{
+                //   SizedBox(
+                //     height: size.height * .4,
+                //     child: Center(child: Text("No restaurant or menu found")),
+                //   ),
+                // },
               },
             ],
           ),
