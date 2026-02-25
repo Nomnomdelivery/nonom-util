@@ -945,11 +945,13 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                                       "Successfully replace item: $isSuccess",
                                                     );
 
-                                                    if (mounted) {
-                                                      navigator.pop();
-                                                    }
-                                                    if (widget.fromSearch) {
-                                                      navigator.pop();
+                                                    if (isSuccess) {
+                                                      if (mounted) {
+                                                        navigator.pop();
+                                                      }
+                                                      if (widget.fromSearch) {
+                                                        navigator.pop();
+                                                      }
                                                     }
                                                   } else {
                                                     FlyToCartOverlay.showAnimation(
