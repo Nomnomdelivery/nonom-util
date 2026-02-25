@@ -112,6 +112,7 @@ class BuildSearchByMenu extends StatelessWidget {
                           currentLocationProvider: currentLocationProvider,
                           appApi: appApi,
                           prefs: prefs,
+                          isReplacement: true,
                         ),
                       ),
                     );
