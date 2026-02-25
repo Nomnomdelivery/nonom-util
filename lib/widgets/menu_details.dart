@@ -953,8 +953,6 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                                       "Successfully replace item: $isSuccess",
                                                     );
 
-                                                    loading = false;
-
                                                     if (isSuccess) {
                                                       if (mounted) {
                                                         navigator.pop();
@@ -1012,7 +1010,6 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                                           debugPrint(
                                                             "Successfully added to cart: $isSuccess",
                                                           );
-                                                          loading = false;
 
                                                           if (!mounted) return;
                                                           navigator.pop();
@@ -1029,7 +1026,10 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                           color: orangePalette,
                                           child: Center(
                                             child: loading
-                                                ? CircularProgressIndicator.adaptive()
+                                                ? CircularProgressIndicator.adaptive(
+                                                    backgroundColor:
+                                                        Colors.white,
+                                                  )
                                                 : data!.isAvailable
                                                 ? Text(
                                                     widget.isReplacement
