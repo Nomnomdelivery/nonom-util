@@ -569,6 +569,7 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                     child: CustomScrollView(
                       slivers: [
                         SliverAppBar(
+                          backgroundColor: Colors.white,
                           elevation: 0,
                           pinned: true,
                           expandedHeight: hasImage ? 300 : null,
