@@ -335,15 +335,15 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
 
     try {
       await updateQuantity(existing);
-      await _refreshCartWithRetry(
-        validateCart: (cart) => cart.any(
-          (cartModel) => cartModel.items.any(
-            (item) =>
-                item.menuId == widget.item.id &&
-                item.quantity >= existing.quantity + quantity,
-          ),
-        ),
-      );
+      // await _refreshCartWithRetry(
+      //   validateCart: (cart) => cart.any(
+      //     (cartModel) => cartModel.items.any(
+      //       (item) =>
+      //           item.menuId == widget.item.id &&
+      //           item.quantity >= existing.quantity + quantity,
+      //     ),
+      //   ),
+      // );
 
       _setLoadingState(false);
       _showSuccessToast(_successMessage);
@@ -379,13 +379,13 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
 
       if (added) {
         _specialInstruction.clear();
-        await _refreshCartWithRetry(
-          initialDelay: Duration(milliseconds: 300),
-          validateCart: (cart) => cart.any(
-            (cartModel) =>
-                cartModel.items.any((item) => item.menuId == widget.item.id),
-          ),
-        );
+        // await _refreshCartWithRetry(
+        //   initialDelay: Duration(milliseconds: 300),
+        //   validateCart: (cart) => cart.any(
+        //     (cartModel) =>
+        //         cartModel.items.any((item) => item.menuId == widget.item.id),
+        //   ),
+        // );
         return true;
       } else {
         _showErrorToast(
@@ -442,16 +442,16 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
 
       if (added) {
         _specialInstruction.clear();
-        await _refreshCartWithRetry(
-          initialDelay: Duration(milliseconds: 500),
-          validateCart: (cart) => cart.any(
-            (cartModel) => cartModel.items.any(
-              (item) =>
-                  item.menuId == widget.item.id &&
-                  item.cartID != widget.originalCartItem!.cartID,
-            ),
-          ),
-        );
+        // await _refreshCartWithRetry(
+        //   initialDelay: Duration(milliseconds: 500),
+        //   validateCart: (cart) => cart.any(
+        //     (cartModel) => cartModel.items.any(
+        //       (item) =>
+        //           item.menuId == widget.item.id &&
+        //           item.cartID != widget.originalCartItem!.cartID,
+        //     ),
+        //   ),
+        // );
         return true;
       } else {
         _showErrorToast(
@@ -473,54 +473,54 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
     return _kForm.currentState?.validate() ?? true;
   }
 
-  Future<void> _refreshCartWithRetry({
-    Duration? initialDelay,
-    required bool Function(List<CartModel>) validateCart,
-  }) async {
-    final currentUser = ref.read(widget.currentUserProvider);
-    if (currentUser == null) return;
+  // Future<void> _refreshCartWithRetry({
+  //   Duration? initialDelay,
+  //   required bool Function(List<CartModel>) validateCart,
+  // }) async {
+  //   final currentUser = ref.read(widget.currentUserProvider);
+  //   if (currentUser == null) return;
 
-    if (initialDelay != null) {
-      await Future.delayed(initialDelay);
-    }
+  //   if (initialDelay != null) {
+  //     await Future.delayed(initialDelay);
+  //   }
 
-    const maxRetries = 5; // Increase retries for power management scenarios
-    List<CartModel> cart = [];
+  //   const maxRetries = 5; // Increase retries for power management scenarios
+  //   List<CartModel> cart = [];
 
-    for (int retries = 0; retries < maxRetries; retries++) {
-      try {
-        cart = await widget.firestore
-            .getCart(userID: currentUser.id)
-            .timeout(
-              Duration(seconds: 10), // Add timeout for Firestore calls
-              onTimeout: () => throw TimeoutException(
-                'Firestore timeout during cart refresh',
-                Duration(seconds: 10),
-              ),
-            );
+  //   for (int retries = 0; retries < maxRetries; retries++) {
+  //     try {
+  //       cart = await widget.firestore
+  //           .getCart(userID: currentUser.id)
+  //           .timeout(
+  //             Duration(seconds: 10), // Add timeout for Firestore calls
+  //             onTimeout: () => throw TimeoutException(
+  //               'Firestore timeout during cart refresh',
+  //               Duration(seconds: 10),
+  //             ),
+  //           );
 
-        if (validateCart(cart)) {
-          break;
-        }
-      } catch (e) {
-        debugPrint('Cart refresh retry $retries failed: $e');
-        // Continue to next retry unless it's the last one
-        if (retries == maxRetries - 1) {
-          debugPrint('All cart refresh retries failed');
-        }
-      }
+  //       if (validateCart(cart)) {
+  //         break;
+  //       }
+  //     } catch (e) {
+  //       debugPrint('Cart refresh retry $retries failed: $e');
+  //       // Continue to next retry unless it's the last one
+  //       if (retries == maxRetries - 1) {
+  //         debugPrint('All cart refresh retries failed');
+  //       }
+  //     }
 
-      if (retries < maxRetries - 1) {
-        // Exponential backoff with jitter for power management scenarios
-        final delay = Duration(
-          milliseconds: (500 * (retries + 1)) + (100 * retries),
-        );
-        await Future.delayed(delay);
-      }
-    }
+  //     if (retries < maxRetries - 1) {
+  //       // Exponential backoff with jitter for power management scenarios
+  //       final delay = Duration(
+  //         milliseconds: (500 * (retries + 1)) + (100 * retries),
+  //       );
+  //       await Future.delayed(delay);
+  //     }
+  //   }
 
-    ref.read(widget.currentUserCartProvider.notifier).update(cart);
-  }
+  //   ref.read(widget.currentUserCartProvider.notifier).update(cart);
+  // }
 
   void _setLoadingState(bool loading) {
     if (!_skipLoadingOverlay) {
