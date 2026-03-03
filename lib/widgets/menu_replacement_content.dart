@@ -86,7 +86,7 @@ class _MenuReplacementContentState extends ConsumerState<MenuReplacementContent>
     final menuResult = ref.watch(widget.menuProvider);
     final AreaSetting? settings = ref.watch(widget.areaSettingsProvider);
     final markUpRate = settings == null
-        ? .03
+        ? .05
         : settings.setting.markupRate / 100;
 
     return menuResult.when(

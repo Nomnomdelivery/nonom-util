@@ -61,7 +61,7 @@ class PopularCard extends StatelessWidget with ColorPalette {
       builder: (context, ref, child) {
         final AreaSetting? settings = ref.watch(areaSettingsProvider);
         final markUpRate = settings == null
-            ? .03
+            ? .05
             : settings.setting.markupRate / 100;
         final double price = item.itemVariation == null
             ? item.price

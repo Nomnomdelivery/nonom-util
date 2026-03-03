@@ -81,7 +81,7 @@ class _SubOptionSelectionState extends ConsumerState<SubOptionSelection> {
   double calculateTotalSubtotal(double price) {
     final AreaSetting? settings = ref.watch(widget.areaSettingsProvider);
     final markUpRate = settings == null
-        ? .03
+        ? .05
         : settings.setting.markupRate / 100;
     return (price * (1 + markUpRate)).ceilToDouble();
   }

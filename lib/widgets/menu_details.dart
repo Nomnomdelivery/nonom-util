@@ -552,7 +552,7 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
   Widget build(BuildContext context) {
     final AreaSetting? settings = ref.watch(widget.areaSettingsProvider);
     final markUpRate = settings == null
-        ? .03
+        ? .05
         : settings.setting.markupRate / 100;
     final details = ref.watch(detailsProvider);
     final bool hasImage =

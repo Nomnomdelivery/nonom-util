@@ -66,7 +66,7 @@ class BuildSearchByMenu extends StatelessWidget {
         final result = ref.watch(dataProvider);
         final AreaSetting? settings = ref.watch(areaSettingsProvider);
         final markUpRate = settings == null
-            ? .03
+            ? .05
             : settings.setting.markupRate / 100;
         return result.when(
           data: (data) {

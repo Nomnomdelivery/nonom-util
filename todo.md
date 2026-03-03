@@ -1,0 +1,1 @@
+- fix 0.3 issue final markUpRate = settings
