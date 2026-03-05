@@ -574,7 +574,9 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                         SliverAppBar(
                           backgroundColor: Colors.white,
                           elevation: 0,
-                          foregroundColor: Colors.black,
+                          iconTheme: const IconThemeData(
+                            color: Colors.black,
+                          ), // Add this
                           pinned: true,
                           expandedHeight: hasImage ? 300 : null,
                           flexibleSpace: hasImage
