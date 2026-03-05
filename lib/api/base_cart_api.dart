@@ -1,11 +1,5 @@
 import 'dart:async';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
-import 'package:nomnom_util/models/cart_item.dart';
-import 'package:nomnom_util/models/delivery_pricing.dart';
-import 'package:nomnom_util/models/qoutation_model.dart';
 import 'package:nomnom_util/models/selected_option_cat.dart';
-import 'package:nomnom_util/models/user_address.dart';
 
 abstract class BaseCartApi {
   // Future<bool> checkRider({

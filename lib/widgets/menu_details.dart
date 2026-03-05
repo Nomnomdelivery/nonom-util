@@ -565,6 +565,7 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
           Positioned.fill(
             child: Scaffold(
               backgroundColor: Colors.white,
+
               body: Column(
                 children: [
                   Expanded(
@@ -573,6 +574,7 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                         SliverAppBar(
                           backgroundColor: Colors.white,
                           elevation: 0,
+                          foregroundColor: Colors.black,
                           pinned: true,
                           expandedHeight: hasImage ? 300 : null,
                           flexibleSpace: hasImage
