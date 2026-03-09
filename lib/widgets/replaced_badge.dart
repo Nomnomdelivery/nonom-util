@@ -2,14 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:nomnom_util/utils/color_pallete.dart';
 
 class ReplacedBadge extends StatelessWidget {
-  const ReplacedBadge({super.key});
+  final Color? color;
+  const ReplacedBadge({super.key, this.color});
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+      padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
-        color: ColorPalette.sgrey,
+        color: color ?? ColorPalette.sgrey,
         borderRadius: BorderRadius.circular(4),
       ),
       child: Text(
