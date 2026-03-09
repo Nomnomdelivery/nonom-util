@@ -3,7 +3,8 @@ import 'package:nomnom_util/utils/color_pallete.dart';
 
 class ReplacedBadge extends StatelessWidget {
   final Color? color;
-  const ReplacedBadge({super.key, required this.color});
+  final String? title;
+  const ReplacedBadge({super.key, this.color, this.title});
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +15,7 @@ class ReplacedBadge extends StatelessWidget {
         borderRadius: BorderRadius.circular(4),
       ),
       child: Text(
-        'Replaced',
+        title ?? 'Replaced',
         style: TextStyle(
           color: Colors.white,
           fontWeight: FontWeight.bold,
