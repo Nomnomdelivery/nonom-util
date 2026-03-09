@@ -19,6 +19,7 @@ class CartItem {
   final List<SelectedOptionCat> options;
   final bool isReplaced;
   final String refCode;
+  final bool isNew;
 
   CartItem({
     required this.refCode,
@@ -40,6 +41,7 @@ class CartItem {
     required this.description,
     required this.options,
     this.isReplaced = false,
+    this.isNew = false,
   });
 
   // cart from order data
@@ -73,6 +75,7 @@ class CartItem {
       description: '',
       isReplaced: json['replaced_by'] != null ? true : false,
       refCode: json['cart_item_ref_code'] ?? "",
+      isNew: json['is_new'],
     );
   }
 
