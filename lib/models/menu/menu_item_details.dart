@@ -45,6 +45,7 @@ class MenuItemDetails extends MenuItem {
     required this.category,
     required this.merchant,
     required super.classificationId,
+    required super.defaultPhotoUrl,
   });
 
   factory MenuItemDetails.fromJson(Map<String, dynamic> json) {
@@ -94,6 +95,9 @@ class MenuItemDetails extends MenuItem {
           ? RawCategory(id: 0, name: "Uncategorized")
           : RawCategory.fromJson(json['category']),
       merchant: MerchantWithCity.fromJson(json['merchant']),
+      defaultPhotoUrl:
+          json['default_photo_url'] ??
+          "https://back.nomnomdelivery.com/images/no_image_placeholder.jpg",
     );
   }
   Map<String, dynamic> toMap() {
