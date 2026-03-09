@@ -75,7 +75,7 @@ class CartItem {
       description: '',
       isReplaced: json['replaced_by'] != null ? true : false,
       refCode: json['cart_item_ref_code'] ?? "",
-      isNew: json['is_new'],
+      isNew: json['is_new'] ?? false,
     );
   }
 
