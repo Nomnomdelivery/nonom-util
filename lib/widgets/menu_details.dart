@@ -32,7 +32,7 @@ import 'package:nomnom_util/utils/color_pallete.dart';
 import 'package:nomnom_util/widgets/custom_loader.dart';
 import 'package:nomnom_util/widgets/fly_to_cart_overlay.dart';
 import 'package:nomnom_util/widgets/meal_inclusion_page.dart';
-import 'package:nomnom_util/widgets/optiona_category_display.dart';
+import 'package:nomnom_util/widgets/optional_category_display.dart';
 import 'package:nomnom_util/widgets/quantity_button.dart';
 import 'package:nomnom_util/widgets/variation_display.dart';
 
