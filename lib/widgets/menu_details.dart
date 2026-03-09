@@ -154,15 +154,6 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
   int quantity = 1;
   List<SelectedOptionCat> _selectedOptions = [];
 
-  @override
-  void initState() {
-    super.initState();
-    if (widget.isReplacement && widget.originalCartItem != null) {
-      quantity = widget.originalCartItem!.quantity;
-      _specialInstruction.text = widget.originalCartItem!.instruction;
-    }
-  }
-
   Widget titler({
     Widget? icon,
     required String title,
