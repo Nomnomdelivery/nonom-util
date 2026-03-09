@@ -924,10 +924,9 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                                     debugPrint(
                                                       "Option choices are not valid",
                                                     );
-                                                    setState(() {
-                                                      loading = false;
-                                                      checkOptionChoicesValid();
-                                                    });
+
+                                                    loading = false;
+
                                                     return;
                                                   }
                                                   if (widget.isReplacement) {
