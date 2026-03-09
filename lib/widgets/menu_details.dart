@@ -926,6 +926,7 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                                     );
                                                     setState(() {
                                                       loading = false;
+                                                      checkOptionChoicesValid();
                                                     });
                                                     return;
                                                   }
