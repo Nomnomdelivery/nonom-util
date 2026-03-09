@@ -12,7 +12,7 @@ class ReplacedBadge extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 8, vertical: 2),
       decoration: BoxDecoration(
         color: color ?? ColorPalette.sgrey,
-        borderRadius: BorderRadius.circular(4),
+        borderRadius: BorderRadius.circular(50),
       ),
       child: Text(
         title ?? 'Replaced',
