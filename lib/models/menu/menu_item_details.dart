@@ -47,12 +47,14 @@ class MenuItemDetails extends MenuItem {
     required super.classificationId,
     required super.defaultPhotoUrl,
     required super.availableStartTime,
+    required super.availableEndTime,
   });
 
   factory MenuItemDetails.fromJson(Map<String, dynamic> json) {
     final List options = json['option_categories'] ?? [];
     final List typedItems = json['items'] ?? [];
     return MenuItemDetails(
+      availableEndTime: json['available_end_time'],
       availableStartTime: json['available_start_time'],
       typedMenuItem: typedItems.map((e) => TypedMenuItem.fromJson(e)).toList(),
       itemVariation: json['item_variation'] == null
