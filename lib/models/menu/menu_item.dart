@@ -32,6 +32,7 @@ class MenuItem {
   final int classificationId;
   final ItemVariation? itemVariation;
   final String defaultPhotoUrl;
+  final String availableStartTime;
   MenuItem({
     required this.subCat,
     required this.mainCat,
@@ -64,6 +65,7 @@ class MenuItem {
     required this.preparationTime,
     required this.classificationId,
     required this.defaultPhotoUrl,
+    required this.availableStartTime,
   });
 
   factory MenuItem.fromJson(Map<String, dynamic> json) {
@@ -104,6 +106,7 @@ class MenuItem {
       preparationDays: json['preparation_days'],
       preparationTime: json['preparation_time'],
       classificationId: json['classification_id'],
+      availableStartTime: json['available_start_time'],
       defaultPhotoUrl:
           json['default_photo_url'] ??
           "https://back.nomnomdelivery.com/images/no_image_placeholder.jpg",
