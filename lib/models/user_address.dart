@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/material.dart';
 import 'package:nomnom_util/extensions/string_capitalize.dart';
 import 'package:nomnom_util/models/current_address.dart';
 
@@ -36,6 +37,7 @@ class UserAddress extends CurrentAddress {
     required this.isForSomeone,
   });
   factory UserAddress.fromJson(Map<String, dynamic> json) {
+    debugPrint("user address $json");
     final List<double> c = json['coordinates']
         .toString()
         .split(',')
