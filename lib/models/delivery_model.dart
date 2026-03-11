@@ -285,7 +285,7 @@ class DeliveryModel {
 
   String shortStatusString() {
     const Map<int, String> statusMap = {
-      0: 'Waiting for Store',
+      0: 'Processing Order',
       1: 'Preparing Order',
       11: 'Assigned',
       2: 'Ready for Pickup',
@@ -302,7 +302,7 @@ class DeliveryModel {
 
   String statusStringNextStep() {
     const Map<int, String> statusMap = {
-      0: 'Waiting for Store',
+      0: 'Processing Order',
       1: 'Ordered',
       11: 'Assigned',
       2: 'Ready for Pickup',
