@@ -98,6 +98,7 @@ class UserAddress extends CurrentAddress {
     "coordinates": "${coordinates.latitude},${coordinates.longitude}",
     'created_at': createdAt.toIso8601String(),
     'updated_at': updatedAt.toIso8601String(),
+    "isForSomeone": isForSomeone,
   };
   UserAddress copyWith({
     String? addressLine,
@@ -146,7 +147,7 @@ class UserAddress extends CurrentAddress {
   }
 
   String stringify() =>
-      "${addressLine.isEmpty ? "" : "$addressLine, "}$barangay, $city, $state"
+      "${addressLine.isEmpty ? "" : "$addressLine, "}$barangay, $city, $state, $isForSomeone "
           .capitalizeWords();
 
   CurrentAddress toAddress() => CurrentAddress(
@@ -160,5 +161,6 @@ class UserAddress extends CurrentAddress {
     region: region,
     state: state,
     pinned: pinned,
+    isForSomeone: isForSomeone,
   );
 }
