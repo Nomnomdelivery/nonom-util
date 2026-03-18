@@ -1023,12 +1023,16 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                                 },
                                           color: orangePalette,
                                           child: Center(
-                                            child: loading
-                                                ? CircularProgressIndicator.adaptive(
-                                                    valueColor:
-                                                        AlwaysStoppedAnimation<
-                                                          Color
-                                                        >(Colors.white),
+                                            child: true
+                                                ? SizedBox(
+                                                    width: 40,
+                                                    height: 40,
+                                                    child: CircularProgressIndicator.adaptive(
+                                                      valueColor:
+                                                          AlwaysStoppedAnimation<
+                                                            Color
+                                                          >(Colors.white),
+                                                    ),
                                                   )
                                                 : data!.isAvailable
                                                 ? Text(
