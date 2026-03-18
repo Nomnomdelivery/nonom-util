@@ -1023,7 +1023,7 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                                 },
                                           color: orangePalette,
                                           child: Center(
-                                            child: true
+                                            child: loading
                                                 ? SizedBox(
                                                     width: 20,
                                                     height: 20,
