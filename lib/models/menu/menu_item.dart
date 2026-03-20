@@ -1,4 +1,5 @@
 import 'package:nomnom_util/models/menu/item_variation.dart';
+import 'package:nomnom_util/models/option/option_category.dart';
 
 class MenuItem {
   final int id;
@@ -34,6 +35,7 @@ class MenuItem {
   final String defaultPhotoUrl;
   final String? availableStartTime;
   final String? availableEndTime;
+  final List<OptionCategory> optionCategories;
   MenuItem({
     required this.subCat,
     required this.mainCat,
@@ -68,10 +70,14 @@ class MenuItem {
     required this.defaultPhotoUrl,
     required this.availableStartTime,
     required this.availableEndTime,
+    required this.optionCategories,
   });
 
   factory MenuItem.fromJson(Map<String, dynamic> json) {
+    final List opts = json['option_categories'] ?? [];
     return MenuItem(
+      optionCategories: opts.map((e) => OptionCategory.fromJson(e)).toList(),
+
       itemVariation: json['item_variation'] == null
           ? null
           : ItemVariation.fromJson(json['item_variation']),

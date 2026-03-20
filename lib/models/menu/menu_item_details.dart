@@ -8,7 +8,6 @@ import 'package:nomnom_util/models/type_menu_item.dart';
 class MenuItemDetails extends MenuItem {
   final MerchantWithCity merchant;
   final RawCategory category;
-  final List<OptionCategory> optionCategories;
   final List<TypedMenuItem> typedMenuItem; // for meal and bundle
   MenuItemDetails({
     required this.typedMenuItem,
@@ -27,7 +26,6 @@ class MenuItemDetails extends MenuItem {
     required super.photoUrl,
     required super.basePrice,
     required super.createdAt,
-    required this.optionCategories,
     required super.isPercent,
     required super.isPopular,
     required super.orderType,
@@ -48,6 +46,7 @@ class MenuItemDetails extends MenuItem {
     required super.defaultPhotoUrl,
     required super.availableStartTime,
     required super.availableEndTime,
+    required super.optionCategories,
   });
 
   factory MenuItemDetails.fromJson(Map<String, dynamic> json) {
