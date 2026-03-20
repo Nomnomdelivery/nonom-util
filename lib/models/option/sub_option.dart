@@ -62,4 +62,23 @@ class SubOption {
       "is_new": false,
     };
   }
+
+  SubOption copyWith({
+    int? mainOptionId,
+    String? name,
+    double? price,
+    int? availability,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+  }) {
+    return SubOption(
+      id: id,
+      mainOptionId: mainOptionId ?? this.mainOptionId,
+      name: name ?? this.name,
+      price: price ?? this.price,
+      availability: availability ?? this.availability,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+    );
+  }
 }
