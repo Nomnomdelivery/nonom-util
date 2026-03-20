@@ -25,6 +25,32 @@ class NeoOption {
     required this.subOptions,
   });
 
+  NeoOption copyWith({
+    int? id,
+    int? optionCategoryId,
+    String? name,
+    String? image,
+    String? groupName,
+    double? price,
+    int? availability,
+    DateTime? createdAt,
+    DateTime? updatedAt,
+    List<SubOption>? subOptions,
+  }) {
+    return NeoOption(
+      id: id ?? this.id,
+      optionCategoryId: optionCategoryId ?? this.optionCategoryId,
+      name: name ?? this.name,
+      image: image ?? this.image,
+      groupName: groupName ?? this.groupName,
+      price: price ?? this.price,
+      availability: availability ?? this.availability,
+      createdAt: createdAt ?? this.createdAt,
+      updatedAt: updatedAt ?? this.updatedAt,
+      subOptions: subOptions ?? this.subOptions,
+    );
+  }
+
   factory NeoOption.fromJson(Map<String, dynamic> json) {
     final List subOptions = json['sub_options'] ?? [];
 
