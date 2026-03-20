@@ -36,6 +36,8 @@ class MenuItem {
   final String? availableStartTime;
   final String? availableEndTime;
   final List<OptionCategory> optionCategories;
+  final String? startTime;
+  final String? endTime;
   MenuItem({
     required this.subCat,
     required this.mainCat,
@@ -71,6 +73,8 @@ class MenuItem {
     required this.availableStartTime,
     required this.availableEndTime,
     required this.optionCategories,
+    required this.startTime,
+    required this.endTime,
   });
 
   factory MenuItem.fromJson(Map<String, dynamic> json) {
@@ -119,6 +123,8 @@ class MenuItem {
       defaultPhotoUrl:
           json['default_photo_url'] ??
           "https://back.nomnomdelivery.com/images/no_image_placeholder.jpg",
+      startTime: json['available_start_time'],
+      endTime: json['available_end_time'],
     );
   }
   Map<String, dynamic> toJson() {
@@ -151,6 +157,8 @@ class MenuItem {
       'preparation_time': preparationTime,
       'classification_id': classificationId,
       'default_photo_url': defaultPhotoUrl,
+      'start_time': startTime,
+      'end_time': endTime,
     };
   }
 }
