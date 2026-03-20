@@ -19,7 +19,6 @@ import 'package:nomnom_util/widgets/menu_replacement_content.dart';
 void showMenuReplacementBottomSheet({
   required BuildContext context,
   required CartItem itemToReplace,
-  required int itemIndex,
   required int merchantId,
   required String merchantName,
   String? orderId,
