@@ -316,4 +316,23 @@ class DeliveryModel {
     };
     return statusMap[status + 1] ?? 'Unknown Status';
   }
+
+  String statusActionString() {
+    const Map<int, String> statusMap = {
+      0: 'Accept Order',
+      1: 'Ready for Pickup',
+      2: 'Waiting for rider',
+      3: 'Rider picked this item',
+      // Override Arrived to show as Picked Up per new requirement
+      4: 'Picked Up',
+      // Override Delivered to show as Picked Up per new requirement
+      5: 'Picked Up',
+      7: 'User cancelled',
+      6: 'Store Cancelled',
+      8: 'System Cancelled',
+      // Override Remitted to show as Picked Up per new requirement
+      9: 'Picked Up',
+    };
+    return statusMap[status] ?? 'Rider Remitted';
+  }
 }
