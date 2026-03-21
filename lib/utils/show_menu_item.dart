@@ -13,7 +13,7 @@ import 'package:nomnom_util/models/user_address.dart';
 import 'package:nomnom_util/models/user_model.dart';
 import 'package:nomnom_util/providers/cart.dart';
 import 'package:nomnom_util/providers/user_provider.dart';
-import 'package:nomnom_util/utils/color_pallete.dart';
+
 import 'package:nomnom_util/widgets/menu_replacement_content.dart';
 
 void showMenuReplacementBottomSheet({
@@ -52,64 +52,23 @@ void showMenuReplacementBottomSheet({
           color: Colors.white,
           borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
         ),
-        child: Column(
-          children: [
-            // Drag handle
-            Container(
-              margin: EdgeInsets.symmetric(vertical: 8),
-              width: 40,
-              height: 4,
-              decoration: BoxDecoration(
-                color: Colors.grey[300],
-                borderRadius: BorderRadius.circular(2),
-              ),
-            ),
-            // Header
-            Padding(
-              padding: EdgeInsets.all(16),
-              child: Row(
-                children: [
-                  Icon(Icons.swap_horiz, color: ColorPalette.orange),
-                  SizedBox(width: 8),
-                  Expanded(
-                    child: Text(
-                      'Replace "${itemToReplace.menuName}"',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
-                  ),
-                  IconButton(
-                    onPressed: () => Navigator.of(context).pop(),
-                    icon: Icon(Icons.close),
-                  ),
-                ],
-              ),
-            ),
-            Divider(height: 1),
-            // Menu content with categories
-            Expanded(
-              child: MenuReplacementContent(
-                merchantId: merchantId,
-                merchantName: merchantName,
-                itemToReplace: itemToReplace,
-                scrollController: scrollController,
-                orderId: orderId,
-                menuProvider: menuProvider,
-                areaSettingsProvider: areaSettingsProvider,
-                api: api,
-                currentUserCartProvider: currentUserCartProvider,
-                cartApi: cartApi,
-                firestore: firestore,
-                currentLocationProvider: currentLocationProvider,
-                currentUserProvider: currentUserProvider,
-                appApi: appApi,
-                prefs: prefs,
-                city: city,
-              ),
-            ),
-          ],
+        child: MenuReplacementContent(
+          merchantId: merchantId,
+          merchantName: merchantName,
+          itemToReplace: itemToReplace,
+          scrollController: scrollController,
+          orderId: orderId,
+          menuProvider: menuProvider,
+          areaSettingsProvider: areaSettingsProvider,
+          api: api,
+          currentUserCartProvider: currentUserCartProvider,
+          cartApi: cartApi,
+          firestore: firestore,
+          currentLocationProvider: currentLocationProvider,
+          currentUserProvider: currentUserProvider,
+          appApi: appApi,
+          prefs: prefs,
+          city: city,
         ),
       ),
     ),

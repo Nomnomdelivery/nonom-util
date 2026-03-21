@@ -89,7 +89,7 @@ class _MenuReplacementContentState extends ConsumerState<MenuReplacementContent>
         ? .05
         : settings.setting.markupRate / 100;
 
-    return menuResult.when(
+    final mainContentSlivers = menuResult.when<List<Widget>>(
       data: (data) {
         // Create tabs and sections
         final List<Tab> tabs = [];
@@ -115,9 +115,9 @@ class _MenuReplacementContentState extends ConsumerState<MenuReplacementContent>
           }
         }
 
-        return Column(
-          children: [
-            Container(
+        return [
+          SliverToBoxAdapter(
+            child: Container(
               padding: EdgeInsets.all(16),
               decoration: BoxDecoration(
                 color: Colors.grey[50],
@@ -163,44 +163,47 @@ class _MenuReplacementContentState extends ConsumerState<MenuReplacementContent>
                 readOnly: true,
               ),
             ),
+          ),
 
             // Category tabs
-            if (tabs.isNotEmpty) ...[
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.white,
-                  border: Border(
-                    bottom: BorderSide(color: Colors.grey.shade300),
+            if (tabs.isNotEmpty)
+              SliverPersistentHeader(
+                pinned: true,
+                delegate: _TabSliverDelegate(
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: Colors.white,
+                      border: Border(
+                        bottom: BorderSide(color: Colors.grey.shade300),
+                      ),
+                    ),
+                    child: TabBar(
+                      controller: _tabController,
+                      isScrollable: true,
+                      labelColor: ColorPalette.orange,
+                      unselectedLabelColor: Colors.black54,
+                      indicatorColor: ColorPalette.orange,
+                      tabAlignment: TabAlignment.start,
+                      tabs: tabs,
+                      onTap: (index) {
+                        if (index < _sectionKeys.length) {
+                          Scrollable.ensureVisible(
+                            _sectionKeys[index].currentContext!,
+                            duration: Duration(milliseconds: 300),
+                            curve: Curves.easeInOut,
+                          );
+                        }
+                      },
+                    ),
                   ),
                 ),
-                child: TabBar(
-                  controller: _tabController,
-                  isScrollable: true,
-                  labelColor: ColorPalette.orange,
-                  unselectedLabelColor: Colors.black54,
-                  indicatorColor: ColorPalette.orange,
-                  tabAlignment: TabAlignment.start,
-                  tabs: tabs,
-                  onTap: (index) {
-                    if (index < _sectionKeys.length) {
-                      Scrollable.ensureVisible(
-                        _sectionKeys[index].currentContext!,
-                        duration: Duration(milliseconds: 300),
-                        curve: Curves.easeInOut,
-                      );
-                    }
-                  },
-                ),
               ),
-            ],
 
             // Menu content
-            Expanded(
-              child: SingleChildScrollView(
-                controller: widget.scrollController,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
+            SliverToBoxAdapter(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
                     // Popular items section
                     if (data.popularItems.isNotEmpty) ...[
                       Container(
@@ -397,12 +400,13 @@ class _MenuReplacementContentState extends ConsumerState<MenuReplacementContent>
                   ],
                 ),
               ),
-            ),
-          ],
-        );
+        ];
       },
-      loading: () => Center(
-        child: Column(
+      loading: () => [
+        SliverFillRemaining(
+          hasScrollBody: false,
+          child: Center(
+            child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             CircularProgressIndicator(color: ColorPalette.orange),
@@ -411,8 +415,13 @@ class _MenuReplacementContentState extends ConsumerState<MenuReplacementContent>
           ],
         ),
       ),
-      error: (error, stack) => Center(
-        child: Column(
+        )
+      ],
+      error: (error, stack) => [
+        SliverFillRemaining(
+          hasScrollBody: false,
+          child: Center(
+            child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Icon(Icons.error_outline, size: 64, color: Colors.grey),
@@ -425,6 +434,56 @@ class _MenuReplacementContentState extends ConsumerState<MenuReplacementContent>
           ],
         ),
       ),
+        )
+      ],
+    );
+
+    return CustomScrollView(
+      controller: widget.scrollController,
+      slivers: [
+        SliverToBoxAdapter(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              // Drag handle
+              Container(
+                margin: EdgeInsets.symmetric(vertical: 8),
+                width: 40,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: Colors.grey[300],
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              // Header
+              Padding(
+                padding: EdgeInsets.all(16),
+                child: Row(
+                  children: [
+                    Icon(Icons.swap_horiz, color: ColorPalette.orange),
+                    SizedBox(width: 8),
+                    Expanded(
+                      child: Text(
+                        'Replace "${widget.itemToReplace.menuName}"',
+                        style: TextStyle(
+                          fontSize: 18,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ),
+                    IconButton(
+                      onPressed: () => Navigator.of(context).pop(),
+                      icon: Icon(Icons.close),
+                    ),
+                  ],
+                ),
+              ),
+              Divider(height: 1),
+            ],
+          ),
+        ),
+        ...mainContentSlivers,
+      ],
     );
   }
 
@@ -432,5 +491,27 @@ class _MenuReplacementContentState extends ConsumerState<MenuReplacementContent>
   void dispose() {
     _tabController.dispose();
     super.dispose();
+  }
+}
+
+class _TabSliverDelegate extends SliverPersistentHeaderDelegate {
+  final Widget child;
+
+  _TabSliverDelegate({required this.child});
+
+  @override
+  double get minExtent => 49.0;
+
+  @override
+  double get maxExtent => 49.0;
+
+  @override
+  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+    return child;
+  }
+
+  @override
+  bool shouldRebuild(covariant _TabSliverDelegate oldDelegate) {
+    return true;
   }
 }
