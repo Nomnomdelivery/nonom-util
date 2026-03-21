@@ -214,7 +214,7 @@ class DeliveryModel {
     final effectiveStatus = status == 9 ? 5 : status;
     Map<int, String> statusMap = {
       -1: "Pending payment",
-      0: 'Waiting for Store',
+      0: 'Processing order',
       1: 'Preparing Order',
       11: 'Assigned',
       2: 'Ready for Pickup',
