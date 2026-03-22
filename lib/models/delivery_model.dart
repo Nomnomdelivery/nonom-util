@@ -59,6 +59,7 @@ class DeliveryModel {
   final List<int> candidates;
   final double finalBalance;
   final double initialPaid;
+  final double onlinePaymentFee;
 
   DeliveryModel({
     required this.finalBalance,
@@ -109,6 +110,7 @@ class DeliveryModel {
     required this.cashOnhand,
     required this.change,
     required this.usedNomnomCoins,
+    required this.onlinePaymentFee,
   });
 
   factory DeliveryModel.fromFirestore(Map<String, dynamic> data) {
@@ -206,6 +208,9 @@ class DeliveryModel {
         data['item_unavailable_action'],
       ),
       candidates: riderCandidates.map((e) => int.parse(e.toString())).toList(),
+      onlinePaymentFee: data['online_payment_fee'] == null
+          ? 0.0
+          : (data['online_payment_fee'] as num).toDouble(),
     );
   }
 
