@@ -246,7 +246,7 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
           backgroundColor: ColorPalette.sscaffoldColor,
           surfaceTintColor: ColorPalette.sscaffoldColor,
           title: Text(
-            "Search Menu}",
+            "Search Menu",
             style: TextStyle(fontSize: 16, fontWeight: FontWeight.w500),
           ),
           bottom: PreferredSize(
