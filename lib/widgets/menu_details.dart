@@ -952,10 +952,8 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                                     );
 
                                                     if (isSuccess) {
-                                                      if (mounted) {
-                                                        navigator.pop();
-                                                        navigator.pop();
-                                                      }
+                                                      navigator.pop();
+                                                      navigator.pop();
                                                     }
                                                   } else {
                                                     FlyToCartOverlay.showAnimation(
@@ -1007,7 +1005,7 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                                             "Successfully added to cart: $isSuccess",
                                                           );
 
-                                                          if (!mounted) return;
+                                                          navigator.pop();
                                                           navigator.pop();
                                                         });
                                                       },
