@@ -1011,11 +1011,7 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
 
                                                           if (!mounted) return;
                                                           navigator.pop();
-
-                                                          if (widget
-                                                              .fromSearch) {
-                                                            navigator.pop();
-                                                          }
+                                                          navigator.pop();
                                                         });
                                                       },
                                                     );
