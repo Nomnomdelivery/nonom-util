@@ -328,9 +328,6 @@ class _MenuReplacementContentState extends ConsumerState<MenuReplacementContent>
                               final item = category.items[itemIndex];
                               return GestureDetector(
                                 onTap: () async {
-                                  Navigator.of(
-                                    context,
-                                  ).pop(); // Close bottom sheet first
                                   await Navigator.push(
                                     context,
                                     MaterialPageRoute(

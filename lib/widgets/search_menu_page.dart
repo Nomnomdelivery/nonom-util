@@ -305,32 +305,6 @@ class _SearchMenuPageState extends ConsumerState<SearchMenuPage>
                         Center(child: CircularProgressIndicator.adaptive()),
                   ),
                 },
-                // if (widget.type != 2) ...{
-                //   store.when(
-                //     data: (storeData) {
-                //       if (storeData.isEmpty) {
-                //         return Container();
-                //       }
-                //       return BuildSearchByStore(
-                //         dataProvider: storeProvider,
-                //         isWholePage: true,
-                //         ffs: widget.ffs,
-                //       );
-                //     },
-                //     error: (_, s) => Container(),
-                //     loading: () =>
-                //         Center(child: CircularProgressIndicator.adaptive()),
-                //   ),
-                // },
-                // Show empty state only when both menu and store are empty
-                // if ((widget.type == 1 || widget.type == 3) &&
-                //     menu.hasValue &&
-                //     (menu.value?.isEmpty ?? true)) ...{
-                //   SizedBox(
-                //     height: size.height * .4,
-                //     child: Center(child: Text("No restaurant or menu found")),
-                //   ),
-                // },
               },
             ],
           ),
