@@ -165,241 +165,231 @@ class _MenuReplacementContentState extends ConsumerState<MenuReplacementContent>
             ),
           ),
 
-            // Category tabs
-            if (tabs.isNotEmpty)
-              SliverPersistentHeader(
-                pinned: true,
-                delegate: _TabSliverDelegate(
-                  child: Container(
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      border: Border(
-                        bottom: BorderSide(color: Colors.grey.shade300),
-                      ),
+          // Category tabs
+          if (tabs.isNotEmpty)
+            SliverPersistentHeader(
+              pinned: true,
+              delegate: _TabSliverDelegate(
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    border: Border(
+                      bottom: BorderSide(color: Colors.grey.shade300),
                     ),
-                    child: TabBar(
-                      controller: _tabController,
-                      isScrollable: true,
-                      labelColor: ColorPalette.orange,
-                      unselectedLabelColor: Colors.black54,
-                      indicatorColor: ColorPalette.orange,
-                      tabAlignment: TabAlignment.start,
-                      tabs: tabs,
-                      onTap: (index) {
-                        if (index < _sectionKeys.length) {
-                          Scrollable.ensureVisible(
-                            _sectionKeys[index].currentContext!,
-                            duration: Duration(milliseconds: 300),
-                            curve: Curves.easeInOut,
-                          );
-                        }
-                      },
-                    ),
+                  ),
+                  child: TabBar(
+                    controller: _tabController,
+                    isScrollable: true,
+                    labelColor: ColorPalette.orange,
+                    unselectedLabelColor: Colors.black54,
+                    indicatorColor: ColorPalette.orange,
+                    tabAlignment: TabAlignment.start,
+                    tabs: tabs,
+                    onTap: (index) {
+                      if (index < _sectionKeys.length) {
+                        Scrollable.ensureVisible(
+                          _sectionKeys[index].currentContext!,
+                          duration: Duration(milliseconds: 300),
+                          curve: Curves.easeInOut,
+                        );
+                      }
+                    },
                   ),
                 ),
               ),
+            ),
 
-            // Menu content
-            SliverToBoxAdapter(
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                    // Popular items section
-                    if (data.popularItems.isNotEmpty) ...[
-                      Container(
-                        key: _sectionKeys.isNotEmpty ? _sectionKeys[0] : null,
-                        padding: EdgeInsets.all(16),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
+          // Menu content
+          SliverToBoxAdapter(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Popular items section
+                if (data.popularItems.isNotEmpty) ...[
+                  Container(
+                    key: _sectionKeys.isNotEmpty ? _sectionKeys[0] : null,
+                    padding: EdgeInsets.all(16),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Row(
                           children: [
-                            Row(
-                              children: [
-                                Icon(
-                                  Icons.whatshot,
-                                  color: ColorPalette.orange,
-                                ),
-                                SizedBox(width: 8),
-                                Text(
-                                  'Popular Items',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w600,
-                                  ),
-                                ),
-                              ],
+                            Icon(Icons.whatshot, color: ColorPalette.orange),
+                            SizedBox(width: 8),
+                            Text(
+                              'Popular Items',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w600,
+                              ),
                             ),
-                            SizedBox(height: 16),
-                            ListView.separated(
-                              shrinkWrap: true,
-                              physics: NeverScrollableScrollPhysics(),
-                              itemCount: data.popularItems.length,
-                              separatorBuilder: (_, i) =>
-                                  Divider(color: Colors.grey.shade300),
-                              itemBuilder: (_, i) {
-                                final item = data.popularItems[i];
-                                return GestureDetector(
-                                  onTap: () async {
-                                    Navigator.of(
-                                      context,
-                                    ).pop(); // Close bottom sheet first
-                                    await Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (_) => MenuDetails(
-                                          item: item,
-                                          preorderDateTime: null,
-                                          isReplacement: true,
-                                          originalCartItem:
-                                              widget.itemToReplace,
-                                          orderId: widget.orderId,
-                                          api: widget.api,
-                                          currentUserCartProvider:
-                                              widget.currentUserCartProvider,
-                                          currentUserProvider:
-                                              widget.currentUserProvider,
-                                          cartApi: widget.cartApi,
-                                          firestore: widget.firestore,
-                                          areaSettingsProvider:
-                                              widget.areaSettingsProvider,
-                                          currentLocationProvider:
-                                              widget.currentLocationProvider,
-                                          appApi: widget.appApi,
-                                          prefs: widget.prefs,
-                                        ),
-                                      ),
-                                    );
-                                  },
-                                  child: AbsorbPointer(
-                                    child: MenuCard(
+                          ],
+                        ),
+                        SizedBox(height: 16),
+                        ListView.separated(
+                          shrinkWrap: true,
+                          physics: NeverScrollableScrollPhysics(),
+                          itemCount: data.popularItems.length,
+                          separatorBuilder: (_, i) =>
+                              Divider(color: Colors.grey.shade300),
+                          itemBuilder: (_, i) {
+                            final item = data.popularItems[i];
+                            return GestureDetector(
+                              onTap: () async {
+                                await Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (_) => MenuDetails(
                                       item: item,
                                       preorderDateTime: null,
-                                      markupRate: markUpRate,
+                                      isReplacement: true,
+                                      originalCartItem: widget.itemToReplace,
+                                      orderId: widget.orderId,
+                                      api: widget.api,
                                       currentUserCartProvider:
                                           widget.currentUserCartProvider,
+                                      currentUserProvider:
+                                          widget.currentUserProvider,
                                       cartApi: widget.cartApi,
                                       firestore: widget.firestore,
                                       areaSettingsProvider:
                                           widget.areaSettingsProvider,
                                       currentLocationProvider:
                                           widget.currentLocationProvider,
-                                      api: widget.api,
-                                      currentUserProvider:
-                                          widget.currentUserProvider,
                                       appApi: widget.appApi,
                                       prefs: widget.prefs,
                                     ),
                                   ),
                                 );
                               },
-                            ),
-                          ],
-                        ),
-                      ),
-                      Container(height: 8, color: Colors.grey.shade100),
-                    ],
-
-                    // Category sections
-                    ListView.separated(
-                      shrinkWrap: true,
-                      physics: NeverScrollableScrollPhysics(),
-                      itemCount: categories.length,
-                      separatorBuilder: (_, i) =>
-                          Container(height: 8, color: Colors.grey.shade100),
-                      itemBuilder: (_, i) {
-                        final category = categories[i];
-                        final keyIndex = data.popularItems.isNotEmpty
-                            ? i + 1
-                            : i;
-
-                        return Container(
-                          key: keyIndex < _sectionKeys.length
-                              ? _sectionKeys[keyIndex]
-                              : null,
-                          padding: EdgeInsets.all(16),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                category.name.capitalizeWords(),
-                                style: TextStyle(
-                                  fontSize: 18,
-                                  fontWeight: FontWeight.w600,
+                              child: AbsorbPointer(
+                                child: MenuCard(
+                                  item: item,
+                                  preorderDateTime: null,
+                                  markupRate: markUpRate,
+                                  currentUserCartProvider:
+                                      widget.currentUserCartProvider,
+                                  cartApi: widget.cartApi,
+                                  firestore: widget.firestore,
+                                  areaSettingsProvider:
+                                      widget.areaSettingsProvider,
+                                  currentLocationProvider:
+                                      widget.currentLocationProvider,
+                                  api: widget.api,
+                                  currentUserProvider:
+                                      widget.currentUserProvider,
+                                  appApi: widget.appApi,
+                                  prefs: widget.prefs,
                                 ),
                               ),
-                              SizedBox(height: 16),
-                              ListView.separated(
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: category.items.length,
-                                separatorBuilder: (_, i) =>
-                                    Divider(color: Colors.grey.shade300),
-                                itemBuilder: (_, itemIndex) {
-                                  final item = category.items[itemIndex];
-                                  return GestureDetector(
-                                    onTap: () async {
-                                      Navigator.of(
-                                        context,
-                                      ).pop(); // Close bottom sheet first
-                                      await Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                          builder: (_) => MenuDetails(
-                                            item: item,
-                                            preorderDateTime: null,
-                                            isReplacement: true,
-                                            originalCartItem:
-                                                widget.itemToReplace,
-                                            orderId: widget.orderId,
-                                            api: widget.api,
-                                            currentUserCartProvider:
-                                                widget.currentUserCartProvider,
-                                            currentUserProvider:
-                                                widget.currentUserProvider,
-                                            cartApi: widget.cartApi,
-                                            firestore: widget.firestore,
-                                            areaSettingsProvider:
-                                                widget.areaSettingsProvider,
-                                            currentLocationProvider:
-                                                widget.currentLocationProvider,
-                                            appApi: widget.appApi,
-                                            prefs: widget.prefs,
-                                          ),
-                                        ),
-                                      );
-                                    },
-                                    child: AbsorbPointer(
-                                      child: MenuCard(
+                            );
+                          },
+                        ),
+                      ],
+                    ),
+                  ),
+                  Container(height: 8, color: Colors.grey.shade100),
+                ],
+
+                // Category sections
+                ListView.separated(
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: categories.length,
+                  separatorBuilder: (_, i) =>
+                      Container(height: 8, color: Colors.grey.shade100),
+                  itemBuilder: (_, i) {
+                    final category = categories[i];
+                    final keyIndex = data.popularItems.isNotEmpty ? i + 1 : i;
+
+                    return Container(
+                      key: keyIndex < _sectionKeys.length
+                          ? _sectionKeys[keyIndex]
+                          : null,
+                      padding: EdgeInsets.all(16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                            category.name.capitalizeWords(),
+                            style: TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w600,
+                            ),
+                          ),
+                          SizedBox(height: 16),
+                          ListView.separated(
+                            shrinkWrap: true,
+                            physics: NeverScrollableScrollPhysics(),
+                            itemCount: category.items.length,
+                            separatorBuilder: (_, i) =>
+                                Divider(color: Colors.grey.shade300),
+                            itemBuilder: (_, itemIndex) {
+                              final item = category.items[itemIndex];
+                              return GestureDetector(
+                                onTap: () async {
+                                  Navigator.of(
+                                    context,
+                                  ).pop(); // Close bottom sheet first
+                                  await Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (_) => MenuDetails(
                                         item: item,
                                         preorderDateTime: null,
-                                        markupRate: markUpRate,
+                                        isReplacement: true,
+                                        originalCartItem: widget.itemToReplace,
+                                        orderId: widget.orderId,
                                         api: widget.api,
                                         currentUserCartProvider:
                                             widget.currentUserCartProvider,
+                                        currentUserProvider:
+                                            widget.currentUserProvider,
                                         cartApi: widget.cartApi,
                                         firestore: widget.firestore,
                                         areaSettingsProvider:
                                             widget.areaSettingsProvider,
                                         currentLocationProvider:
                                             widget.currentLocationProvider,
-                                        currentUserProvider:
-                                            widget.currentUserProvider,
                                         appApi: widget.appApi,
                                         prefs: widget.prefs,
                                       ),
                                     ),
                                   );
                                 },
-                              ),
-                            ],
+                                child: AbsorbPointer(
+                                  child: MenuCard(
+                                    item: item,
+                                    preorderDateTime: null,
+                                    markupRate: markUpRate,
+                                    api: widget.api,
+                                    currentUserCartProvider:
+                                        widget.currentUserCartProvider,
+                                    cartApi: widget.cartApi,
+                                    firestore: widget.firestore,
+                                    areaSettingsProvider:
+                                        widget.areaSettingsProvider,
+                                    currentLocationProvider:
+                                        widget.currentLocationProvider,
+                                    currentUserProvider:
+                                        widget.currentUserProvider,
+                                    appApi: widget.appApi,
+                                    prefs: widget.prefs,
+                                  ),
+                                ),
+                              );
+                            },
                           ),
-                        );
-                      },
-                    ),
-
-                    SizedBox(height: 20),
-                  ],
+                        ],
+                      ),
+                    );
+                  },
                 ),
-              ),
+
+                SizedBox(height: 20),
+              ],
+            ),
+          ),
         ];
       },
       loading: () => [
@@ -407,34 +397,34 @@ class _MenuReplacementContentState extends ConsumerState<MenuReplacementContent>
           hasScrollBody: false,
           child: Center(
             child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            CircularProgressIndicator(color: ColorPalette.orange),
-            SizedBox(height: 16),
-            Text('Loading menu...'),
-          ],
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                CircularProgressIndicator(color: ColorPalette.orange),
+                SizedBox(height: 16),
+                Text('Loading menu...'),
+              ],
+            ),
+          ),
         ),
-      ),
-        )
       ],
       error: (error, stack) => [
         SliverFillRemaining(
           hasScrollBody: false,
           child: Center(
             child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(Icons.error_outline, size: 64, color: Colors.grey),
-            SizedBox(height: 16),
-            Text('Unable to load menu'),
-            TextButton(
-              onPressed: () => ref.invalidate(widget.menuProvider),
-              child: Text('Try Again'),
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.error_outline, size: 64, color: Colors.grey),
+                SizedBox(height: 16),
+                Text('Unable to load menu'),
+                TextButton(
+                  onPressed: () => ref.invalidate(widget.menuProvider),
+                  child: Text('Try Again'),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
-      ),
-        )
       ],
     );
 
@@ -506,7 +496,11 @@ class _TabSliverDelegate extends SliverPersistentHeaderDelegate {
   double get maxExtent => 49.0;
 
   @override
-  Widget build(BuildContext context, double shrinkOffset, bool overlapsContent) {
+  Widget build(
+    BuildContext context,
+    double shrinkOffset,
+    bool overlapsContent,
+  ) {
     return child;
   }
 
