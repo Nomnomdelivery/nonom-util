@@ -954,8 +954,6 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                                     if (isSuccess) {
                                                       if (mounted) {
                                                         navigator.pop();
-                                                      }
-                                                      if (widget.fromSearch) {
                                                         navigator.pop();
                                                       }
                                                     }
@@ -1010,7 +1008,6 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                                           );
 
                                                           if (!mounted) return;
-                                                          navigator.pop();
                                                           navigator.pop();
                                                         });
                                                       },
