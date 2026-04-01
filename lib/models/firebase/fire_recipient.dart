@@ -16,7 +16,7 @@ class FireRecipient {
     return FireRecipient(
       contactNumber: data['contact_number'] as String,
       name: data['name'] as String,
-      orderedBy: data['ordered_by'] != null
+      orderedBy: data['ordered_by'] is Map<String, dynamic>
           ? OrderedBy.fromFirestore(data['ordered_by'] as Map<String, dynamic>)
           : null,
     );
