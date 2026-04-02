@@ -143,6 +143,52 @@ class CartItem {
     };
   }
 
+  CartItem copyWith({
+    int? menuId,
+    int? cartID,
+    int? quantityLimit,
+    int? prepTime,
+    int? prepDay,
+    bool? isSelected,
+    int? quantity,
+    double? rawPrice,
+    double? subtotal,
+    OrderType? orderType,
+    String? instruction,
+    bool? isAvailable,
+    String? menuName,
+    String? photoUrl,
+    String? description,
+    MenuVariation? selectedVariant,
+    List<SelectedOptionCat>? options,
+    bool? isReplaced,
+    String? refCode,
+    bool? isNew,
+  }) {
+    return CartItem(
+      menuId: menuId ?? this.menuId,
+      cartID: cartID ?? this.cartID,
+      quantityLimit: quantityLimit ?? this.quantityLimit,
+      prepTime: prepTime ?? this.prepTime,
+      prepDay: prepDay ?? this.prepDay,
+      isSelected: isSelected ?? this.isSelected,
+      quantity: quantity ?? this.quantity,
+      rawPrice: rawPrice ?? this.rawPrice,
+      subtotal: subtotal ?? this.subtotal,
+      orderType: orderType ?? this.orderType,
+      instruction: instruction ?? this.instruction,
+      isAvailable: isAvailable ?? this.isAvailable,
+      menuName: menuName ?? this.menuName,
+      photoUrl: photoUrl ?? this.photoUrl,
+      description: description ?? this.description,
+      selectedVariant: selectedVariant ?? this.selectedVariant,
+      options: options ?? this.options,
+      isReplaced: isReplaced ?? this.isReplaced,
+      refCode: refCode ?? this.refCode,
+      isNew: isNew ?? this.isNew,
+    );
+  }
+
   double calculateSubtotal(double markUpRate) {
     final mainPrice = ((selectedVariant?.price ?? rawPrice) * (1 + markUpRate))
         .ceilToDouble();
