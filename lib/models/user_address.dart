@@ -147,7 +147,7 @@ class UserAddress extends CurrentAddress {
   }
 
   String stringify() =>
-      "${addressLine.isEmpty ? "" : "$addressLine, "}$barangay, $city, $state, $isForSomeone "
+      "${addressLine.isEmpty ? "" : "$addressLine, "}$barangay, $city, $state"
           .capitalizeWords();
 
   CurrentAddress toAddress() => CurrentAddress(
