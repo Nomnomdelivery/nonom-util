@@ -181,12 +181,22 @@ class DeliveryModel {
       itemsString: data['items_string'] as String,
       payment: FirePayment.fromJson(data['payment']),
       discount: data['discount']?.toDouble() ?? 0.0,
-      itemUnavailableAction: data['item_unavailable_action'] == null
-          ? const ItemUnavailableAction(
-              id: 0,
-              string: "Remove it from my order",
-            )
-          : ItemUnavailableAction.fromJson(data['item_unavailable_action']),
+      itemUnavailableAction: () {
+        try {
+          return data['item_unavailable_action'] == null
+              ? const ItemUnavailableAction(
+                  id: 0,
+                  string: "Remove it from my order",
+                )
+              : ItemUnavailableAction.fromJson(data['item_unavailable_action']);
+        } catch (e) {
+          debugPrint(
+            "FAILED TO PARSE ItemUnavailableAction for Order ID: ${data['id']}",
+          );
+          debugPrint("Raw data: ${data['item_unavailable_action']}");
+          rethrow;
+        }
+      }(),
       userId: data['user_id'] as int,
       cashOnhand:
           data['cash_on_hand'] == null ||
@@ -204,9 +214,19 @@ class DeliveryModel {
         data['store_ready_for_pickup_at'],
       ),
       riderRejections: int.tryParse(data['rider_rejections'].toString()) ?? 0,
-      unavailableAction: UnavailableAction.fromJson(
-        data['item_unavailable_action'],
-      ),
+      unavailableAction: () {
+        try {
+          return UnavailableAction.fromJson(
+            data['item_unavailable_action'],
+          );
+        } catch (e) {
+          debugPrint(
+            "FAILED TO PARSE UnavailableAction for Order ID: ${data['id']}",
+          );
+          debugPrint("Raw data: ${data['item_unavailable_action']}");
+          rethrow;
+        }
+      }(),
       candidates: riderCandidates.map((e) => int.parse(e.toString())).toList(),
       onlinePaymentFee: data['online_payment_fee'] == null
           ? 0.0
