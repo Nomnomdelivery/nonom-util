@@ -28,11 +28,10 @@ class ItemUnavailableAction {
   }
 
   factory ItemUnavailableAction.fromJson(Map<String, dynamic> json) {
+    debugPrint("Parsing ItemUnavailableAction from JSON: $json");
     return ItemUnavailableAction(
-      id: json['id'] is bool
-          ? (json['id'] as bool ? 1 : 0)
-          : (json['id'] as num?)?.toInt() ?? 0,
-      string: json['string']?.toString() ?? "Remove it from my order",
+      id: json['id'],
+      string: json['string'] as String,
     );
   }
 

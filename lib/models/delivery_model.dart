@@ -186,10 +186,7 @@ class DeliveryModel {
               id: 0,
               string: "Remove it from my order",
             )
-          : ItemUnavailableAction.fromJson(
-              data['item_unavailable_action'],
-              data['id'],
-            ),
+          : ItemUnavailableAction.fromJson(data['item_unavailable_action']),
       userId: data['user_id'] as int,
       cashOnhand:
           data['cash_on_hand'] == null ||
