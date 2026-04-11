@@ -27,13 +27,12 @@ class ItemUnavailableAction {
     }
   }
 
-  factory ItemUnavailableAction.fromJson(Map<String, dynamic> json, int id) {
-    try {
-      return ItemUnavailableAction(id: id, string: json['string'] as String);
-    } catch (e) {
-      debugPrint("Error parsing ItemUnavailableAction from JSON: $e $id");
-      return ItemUnavailableAction.fromId(0);
-    }
+  factory ItemUnavailableAction.fromJson(Map<String, dynamic> json) {
+    debugPrint("Parsing ItemUnavailableAction from JSON: $json");
+    return ItemUnavailableAction(
+      id: json['id'],
+      string: json['string'] as String,
+    );
   }
 
   Map<String, dynamic> toJson() => {"id": id, "string": string};
