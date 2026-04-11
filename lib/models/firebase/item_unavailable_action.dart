@@ -1,3 +1,5 @@
+import 'package:flutter/material.dart';
+
 class ItemUnavailableAction {
   final int id;
   final String string;
@@ -25,11 +27,13 @@ class ItemUnavailableAction {
     }
   }
 
-  factory ItemUnavailableAction.fromJson(Map<String, dynamic> json) =>
-      ItemUnavailableAction(
-        id: json['id'] as int,
-        string: json['string'] as String,
-      );
+  factory ItemUnavailableAction.fromJson(Map<String, dynamic> json) {
+    debugPrint("Parsing ItemUnavailableAction from JSON: $json");
+    return ItemUnavailableAction(
+      id: json['id'] as int,
+      string: json['string'] as String,
+    );
+  }
 
   Map<String, dynamic> toJson() => {"id": id, "string": string};
 
