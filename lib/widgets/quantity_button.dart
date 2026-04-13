@@ -14,12 +14,14 @@ class QuantityButton extends StatefulWidget {
     this.limit,
     this.withBox = false,
     this.fontSize = 26,
+    this.isDisabled = false,
   });
   final int value;
   final int? limit;
   final double fontSize;
   final Function()? onDelete;
   final bool withBox;
+  final bool isDisabled;
   final ValueChanged<int> callback;
   @override
   State<QuantityButton> createState() => _QuantityButtonState();
@@ -67,7 +69,9 @@ class _QuantityButtonState extends State<QuantityButton> with ColorPalette {
           ),
 
           child: InkWell(
-            onTap: value == 1
+            onTap: widget.isDisabled
+                ? null
+                : value == 1
                 ? widget.onDelete
                 : () {
                     setState(() {
@@ -90,26 +94,28 @@ class _QuantityButtonState extends State<QuantityButton> with ColorPalette {
         ),
 
         InkWell(
-          onTap: () async {
-            await showModalBottomSheet(
-              context: context,
-              backgroundColor: Colors.transparent,
-              barrierLabel: "",
-              isScrollControlled: true,
-              isDismissible: true,
-              barrierColor: Colors.black38,
-              builder: (context) => QuantityField(
-                initialValue: value,
-                callback: (int v) {
-                  setState(() {
-                    value = v;
-                  });
-                  widget.callback(v);
+          onTap: widget.isDisabled
+              ? null
+              : () async {
+                  await showModalBottomSheet(
+                    context: context,
+                    backgroundColor: Colors.transparent,
+                    barrierLabel: "",
+                    isScrollControlled: true,
+                    isDismissible: true,
+                    barrierColor: Colors.black38,
+                    builder: (context) => QuantityField(
+                      initialValue: value,
+                      callback: (int v) {
+                        setState(() {
+                          value = v;
+                        });
+                        widget.callback(v);
+                      },
+                      limit: widget.limit,
+                    ),
+                  );
                 },
-                limit: widget.limit,
-              ),
-            );
-          },
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
             child: Text(

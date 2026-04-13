@@ -46,6 +46,8 @@ class MenuDetails extends ConsumerStatefulWidget {
     this.replacementIndex,
     this.orderId,
     this.fromSearch = false,
+    this.isPreview = false,
+    this.removeMarkUp = false,
     required this.api,
     required this.currentUserCartProvider,
     required this.currentUserProvider,
@@ -75,6 +77,8 @@ class MenuDetails extends ConsumerStatefulWidget {
   final BaseAppApi appApi;
   final BaseDataCacher prefs;
   final bool fromSearch;
+  final bool isPreview;
+  final bool removeMarkUp;
 
   @override
   ConsumerState<MenuDetails> createState() => _MenuDetailsState();
@@ -867,7 +871,7 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                   ),
                                   Text(
                                     calculateSubtotal(
-                                      markUpRate,
+                                      widget.removeMarkUp ? 0 : markUpRate,
                                       data.itemVariation?.variations ?? [],
                                     ).toAmount(),
                                     style: TextStyle(
@@ -882,6 +886,7 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                               Row(
                                 children: [
                                   QuantityButton(
+                                    isDisabled: widget.isPreview,
                                     withBox: true,
                                     limit: widget.item.quantityLimit,
                                     value: quantity,
@@ -900,8 +905,10 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                           elevation: 0,
                                           height: 50,
                                           disabledColor: Colors.grey,
-                                          onPressed:
-                                              data == null || !data.isAvailable
+                                          onPressed: widget.isPreview
+                                              ? null
+                                              : data == null ||
+                                                    !data.isAvailable
                                               ? null
                                               : () async {
                                                   setState(() {
