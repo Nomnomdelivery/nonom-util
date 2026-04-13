@@ -745,7 +745,9 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                               selectedVariant = value;
                                             });
                                           },
-                                          markup: markUpRate,
+                                          markup: widget.removeMarkUp
+                                              ? 0
+                                              : markUpRate,
                                           placeholderImage:
                                               data.merchant.photoUrl,
                                         ),
@@ -768,7 +770,9 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                                 data.optionCategories[i];
 
                                             return OptionCategoryDisplay(
-                                              markup: markUpRate,
+                                              markup: widget.removeMarkUp
+                                                  ? 0
+                                                  : markUpRate,
                                               optionChoices: cat.options,
                                               requiredCount:
                                                   cat.requiredOptionCount,
