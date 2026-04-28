@@ -8,6 +8,7 @@ class FireMerchant {
   final FireRating? rate;
   final double merchantFee;
   final int acceptanceWindowMinutes;
+  final String? contactNumber;
   const FireMerchant({
     required this.name,
     required this.photoUrl,
@@ -15,6 +16,7 @@ class FireMerchant {
     required this.rate,
     required this.merchantFee,
     required this.acceptanceWindowMinutes,
+    required this.contactNumber,
   });
 
   factory FireMerchant.fromJson(Map<String, dynamic> json) => FireMerchant(
@@ -24,14 +26,6 @@ class FireMerchant {
     coordinates: json['coordinates'].toString().toGeopoint(),
     photoUrl: json['photo'],
     merchantFee: json['merchant_fee'] ?? 0.0,
+    contactNumber: json['contact_number'],
   );
-
-  Map<String, dynamic> toJson() => {
-    "rate": rate?.toJson(),
-    "name": name,
-    "photo_url": photoUrl,
-    "coordinates": "${coordinates.latitude},${coordinates.longitude}",
-    "merchant_fee": merchantFee,
-    "acceptance_date_time": acceptanceWindowMinutes,
-  };
 }
