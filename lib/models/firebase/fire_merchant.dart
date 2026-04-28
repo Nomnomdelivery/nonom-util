@@ -9,6 +9,7 @@ class FireMerchant {
   final double merchantFee;
   final int acceptanceWindowMinutes;
   final String? contactNumber;
+  final List<String> merchantOwnerId;
   const FireMerchant({
     required this.name,
     required this.photoUrl,
@@ -17,6 +18,7 @@ class FireMerchant {
     required this.merchantFee,
     required this.acceptanceWindowMinutes,
     required this.contactNumber,
+    required this.merchantOwnerId,
   });
 
   factory FireMerchant.fromJson(Map<String, dynamic> json) => FireMerchant(
@@ -27,5 +29,6 @@ class FireMerchant {
     photoUrl: json['photo'],
     merchantFee: json['merchant_fee'] ?? 0.0,
     contactNumber: json['contact_number'],
+    merchantOwnerId: List<String>.from(json['merchant_owner_id'] ?? []),
   );
 }
