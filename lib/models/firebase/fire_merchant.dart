@@ -10,7 +10,7 @@ class FireMerchant {
   final int acceptanceWindowMinutes;
   final String? phoneNumber;
   final bool isChatAvailable;
-  final List<String> ownerids;
+  final List<int> ownerids;
   const FireMerchant({
     required this.name,
     required this.photoUrl,
@@ -31,7 +31,7 @@ class FireMerchant {
     photoUrl: json['photo'],
     merchantFee: json['merchant_fee'] ?? 0.0,
     phoneNumber: json['phone_number'],
-    ownerids: List<String>.from(json['owner_ids'] ?? []),
+    ownerids: List<int>.from(json['owner_ids'] ?? []),
     isChatAvailable: json['is_chat_available'] ?? false,
   );
 }
