@@ -28,42 +28,19 @@ class OperatingDay {
     required this.text,
   });
 
-  factory OperatingDay.fromJson(Map<String, dynamic>? json) {
-    if (json == null) {
-      return OperatingDay(
-        id: 0,
-        merchantId: 0,
-        startTime: const TimeOfDay(hour: 0, minute: 0),
-        endTime: const TimeOfDay(hour: 0, minute: 0),
-        day: 0,
-        createdAt: DateTime.now(),
-        updatedAt: DateTime.now(),
-        enable: false,
-        label: '',
-        order: 0,
-        text: '',
-      );
-    }
+  factory OperatingDay.fromJson(Map<String, dynamic> json) {
     return OperatingDay(
-      id: json['id'] ?? 0,
-      merchantId: json['merchant_id'] ?? 0,
-      startTime:
-          json['start_time']?.toString().toTimeOfDay ??
-          const TimeOfDay(hour: 0, minute: 0),
-      endTime:
-          json['end_time']?.toString().toTimeOfDay ??
-          const TimeOfDay(hour: 0, minute: 0),
-      day: json['day'] ?? 0,
-      createdAt: json['created_at'] != null
-          ? DateTime.parse(json['created_at'])
-          : DateTime.now(),
-      updatedAt: json['updated_at'] != null
-          ? DateTime.parse(json['updated_at'])
-          : DateTime.now(),
+      id: json['id'],
+      merchantId: json['merchant_id'],
+      startTime: json['start_time'].toString().toTimeOfDay,
+      endTime: json['end_time'].toString().toTimeOfDay,
+      day: json['day'],
+      createdAt: DateTime.parse(json['created_at']),
+      updatedAt: DateTime.parse(json['updated_at']),
       enable: json['enable'] == 1,
-      label: json['label'] ?? '',
-      order: json['order'] ?? 0,
-      text: json['text'] ?? '',
+      label: json['label'],
+      order: json['order'],
+      text: json['text'],
     );
   }
 
