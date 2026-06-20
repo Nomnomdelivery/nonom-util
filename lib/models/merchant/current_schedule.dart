@@ -33,22 +33,45 @@ class CurrentSchedule {
     required this.isOpen,
   });
 
-  factory CurrentSchedule.fromJson(Map<String, dynamic> json) {
+  factory CurrentSchedule.fromJson(Map<String, dynamic>? json) {
+    if (json == null) {
+      return CurrentSchedule(
+        id: 0,
+        merchantId: 0,
+        startTime: '00:00:00',
+        endTime: '00:00:00',
+        day: 0,
+        createdAt: DateTime.now(),
+        updatedAt: DateTime.now(),
+        enable: false,
+        label: '',
+        order: 0,
+        text: '',
+        opening: '',
+        start: '',
+        end: '',
+        isOpen: false,
+      );
+    }
     return CurrentSchedule(
-      id: json['id'],
-      merchantId: json['merchant_id'],
-      startTime: json['start_time'],
-      endTime: json['end_time'],
-      day: json['day'],
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
+      id: json['id'] ?? 0,
+      merchantId: json['merchant_id'] ?? 0,
+      startTime: json['start_time'] ?? '',
+      endTime: json['end_time'] ?? '',
+      day: json['day'] ?? 0,
+      createdAt: json['created_at'] != null
+          ? DateTime.parse(json['created_at'])
+          : DateTime.now(),
+      updatedAt: json['updated_at'] != null
+          ? DateTime.parse(json['updated_at'])
+          : DateTime.now(),
       enable: json['enable'] == 1,
-      label: json['label'],
-      order: json['order'],
-      text: json['text'],
-      opening: json['opening'],
-      start: json['start'],
-      end: json['end'],
+      label: json['label'] ?? '',
+      order: json['order'] ?? 0,
+      text: json['text'] ?? '',
+      opening: json['opening'] ?? '',
+      start: json['start'] ?? '',
+      end: json['end'] ?? '',
       isOpen: json['is_open'] == 1,
     );
   }

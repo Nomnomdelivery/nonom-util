@@ -10,18 +10,22 @@ class LocationModel {
     required this.mergedIds,
   });
 
-  factory LocationModel.fromJson(Map<String, dynamic> json) => LocationModel(
-    mergedIds: json['merge_on'] == null
-        ? [int.parse(json['id'].toString())]
-        : json['merge_on']
-              .toString()
-              .replaceAll(RegExp(r'[\[\]]'), '')
-              .split(',')
-              .map((e) => int.parse(e))
-              .toList(),
-    name: json['name'].toString().pascalToNormal(),
-    id: int.parse(json['id'].toString()),
-  );
+  factory LocationModel.fromJson(Map<String, dynamic>? json) {
+    if (json == null)
+      return const LocationModel(name: '', id: 0, mergedIds: []);
+    return LocationModel(
+      mergedIds: json['merge_on'] == null
+          ? [int.parse(json['id'].toString())]
+          : json['merge_on']
+                .toString()
+                .replaceAll(RegExp(r'[\[\]]'), '')
+                .split(',')
+                .map((e) => int.parse(e))
+                .toList(),
+      name: json['name'].toString().pascalToNormal(),
+      id: int.parse(json['id'].toString()),
+    );
+  }
 
   Map<String, dynamic> toJson() => {"id": id, "name": name};
 
