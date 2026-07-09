@@ -18,6 +18,8 @@ class Merchant {
   final GeoPoint coordinates;
   final double merchantFee;
   final int? isTestAccount;
+  final bool? isNewStore;
+  final DateTime? approvedAt;
   const Merchant({
     required this.operatingDays,
     required this.coverPhotoUrl,
@@ -35,7 +37,16 @@ class Merchant {
     required this.currentSchedule,
     required this.merchantFee,
     this.isTestAccount,
+    this.isNewStore,
+    this.approvedAt,
   });
+
+  bool shouldShowNewStoreBadge({required Set<int> qaMerchantIds}) {
+    if (isNewStore == true) return true;
+    if (qaMerchantIds.contains(id)) return true;
+    return false;
+  }
+
   Map<String, dynamic> toJson() {
     return <String, dynamic>{
       'id': id,
@@ -82,6 +93,10 @@ class Merchant {
                   "https://back.nomnomdelivery.com/images/no_image_placeholder.jpg")
               .toString()
               .replaceFirst("customer.", 'back.'),
+      isNewStore: map['is_new_store'] == true || map['is_new_store'] == 1,
+      approvedAt: map['approved_at'] == null
+          ? null
+          : DateTime.tryParse(map['approved_at'].toString()),
     );
   }
 }

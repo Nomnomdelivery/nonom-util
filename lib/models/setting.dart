@@ -48,6 +48,7 @@ class Setting {
   final double riderTransferLimit;
   final String postingTime;
   final double markupRate;
+  final int newStoreBadgeDurationDays;
 
   Setting({
     required this.id,
@@ -99,6 +100,7 @@ class Setting {
     required this.riderTransferLimit,
     required this.postingTime,
     required this.markupRate,
+    this.newStoreBadgeDurationDays = 30,
   });
 
   factory Setting.fromJson(Map<String, dynamic> json) {
@@ -186,6 +188,7 @@ class Setting {
       riderTransferLimit: double.parse(json['rider_transfer_limit'].toString()),
       postingTime: json['posting_time'],
       markupRate: double.parse(json['markup_rate'].toString()),
+      newStoreBadgeDurationDays: json['new_store_badge_duration_days'] ?? 30,
     );
   }
 
@@ -240,6 +243,7 @@ class Setting {
       'rider_transfer_limit': riderTransferLimit,
       'posting_time': postingTime,
       'markup_rate': markupRate,
+      'new_store_badge_duration_days': newStoreBadgeDurationDays,
     };
   }
 }

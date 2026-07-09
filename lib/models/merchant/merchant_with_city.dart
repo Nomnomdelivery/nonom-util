@@ -31,6 +31,8 @@ class MerchantWithCity extends Merchant {
     required super.coverPhotoUrl,
     required super.merchantFee,
     required super.isTestAccount,
+    super.isNewStore,
+    super.approvedAt,
   });
   @override
   Map<String, dynamic> toJson() {
@@ -83,6 +85,10 @@ class MerchantWithCity extends Merchant {
       name: map['name'],
       currentSchedule: CurrentSchedule.fromJson(map['current_schedule']),
       photoUrl: map['photo_url'] ?? "",
+      isNewStore: map['is_new_store'] == true || map['is_new_store'] == 1,
+      approvedAt: map['approved_at'] == null
+          ? null
+          : DateTime.tryParse(map['approved_at'].toString()),
     );
   }
   // static final StoreApi _api = StoreApi();
