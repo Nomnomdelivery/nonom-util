@@ -80,19 +80,11 @@ class Merchant {
       description: map['description'] ?? "",
       operatingDays: ops.map((e) => OperatingDay.fromJson(e)).toList(),
       coordinates: map['coordinates'].toString().toGeopoint(),
-      coverPhotoUrl:
-          (map['cover_photo_url'] ??
-                  "https://back.nomnomdelivery.com/images/no_image_placeholder.jpg")
-              .toString()
-              .replaceFirst("customer.", 'back.'),
+      coverPhotoUrl: map['cover_photo_url'],
       id: map['id'] as int,
       name: map['name'],
       currentSchedule: CurrentSchedule.fromJson(map['current_schedule']),
-      photoUrl:
-          (map['photo_url'] ??
-                  "https://back.nomnomdelivery.com/images/no_image_placeholder.jpg")
-              .toString()
-              .replaceFirst("customer.", 'back.'),
+      photoUrl: map['photo_url'],
       isNewStore: map['is_new_store'] == true || map['is_new_store'] == 1,
       approvedAt: map['approved_at'] == null
           ? null

@@ -73,11 +73,7 @@ class MerchantWithCity extends Merchant {
       displayAddressString: "${mBrgy.name}, ${mCity.name}, ${mState.name}",
       operatingDays: ops.map((e) => OperatingDay.fromJson(e)).toList(),
       coordinates: map['coordinates'].toString().toGeopoint(),
-      coverPhotoUrl:
-          (map['cover_photo_url'] ??
-                  "https://back.nomnomdelivery.com/images/no_image_placeholder.jpg")
-              .toString()
-              .replaceFirst("customer.", 'back.'),
+      coverPhotoUrl: map['cover_photo_url'],
       state: mState,
       city: mCity,
       brgy: mBrgy,
