@@ -78,7 +78,7 @@ class BuildSearchByMenu extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Image.asset(
-                      "packages/nomnom_util/assets/images/rider.png",
+                      "packages/nomnom_util/lib/assets/images/rider.png",
                       height: 100,
                     ),
                     const Gap(20),

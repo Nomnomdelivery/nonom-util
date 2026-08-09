@@ -35,10 +35,11 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-  # To add assets to your package, add an assets section, like this:
+  # Only ship assets actually referenced by this package.
+  # Large GIFs / shared images live in the host app to avoid APK double-bundling.
   assets:
-    - lib/assets/images/
-    - lib/assets/icons/
+    - lib/assets/images/customer.jpg
+    - lib/assets/images/rider.png
   #   - images/a_dot_ham.jpeg
   #
   # For details regarding assets in packages, see
