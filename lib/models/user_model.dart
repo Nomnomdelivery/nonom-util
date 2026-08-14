@@ -1,6 +1,10 @@
 import 'package:nomnom_util/models/user_address.dart';
 
 class UserModel {
+  /// Base host for relative `profile_pic` paths. Set from app env (DOMAIN).
+  /// Defaults to production; staging should set `https://customer-test.nomnomdelivery.com`.
+  static String profileBaseUrl = 'https://customer.nomnomdelivery.com';
+
   final int id;
   final String email;
   final DateTime? emailVerifiedAt;
@@ -67,7 +71,7 @@ class UserModel {
       profilePic: json['profile_pic'] == null
           ? json['avatar'] ??
                 "https://back.nomnomdelivery.com/images/no_image_placeholder.jpg"
-          : "https://customer.nomnomdelivery.com${json['profile_pic']}",
+          : "$profileBaseUrl${json['profile_pic']}",
       firstname: json['firstname'] ?? "",
       middlename: json['middlename'],
       lastname: json['lastname'] ?? "",
