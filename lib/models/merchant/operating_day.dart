@@ -40,7 +40,7 @@ class OperatingDay {
       enable: json['enable'] == 1,
       label: json['label'],
       order: json['order'],
-      text: json['text'],
+      text: json['text'] ?? '',
     );
   }
 
