@@ -45,7 +45,7 @@ class CurrentSchedule {
       enable: json['enable'] == 1,
       label: json['label'],
       order: json['order'],
-      text: json['text'],
+      text: json['text'] ?? '',
       opening: json['opening'],
       start: json['start'],
       end: json['end'],
