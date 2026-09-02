@@ -22,6 +22,18 @@ class CartModel {
               .toList(),
   );
 
+  CartModel copyWith({
+    MerchantWithCity? merchant,
+    List<CartItem>? items,
+    bool? isVisible,
+  }) {
+    return CartModel(
+      merchant: merchant ?? this.merchant,
+      items: items ?? this.items,
+      isVisible: isVisible ?? this.isVisible,
+    );
+  }
+
   Map<String, dynamic> toJson() => {
     "merchant": merchant.toJson(),
     "items": items.map((e) => e.toJson()).toList(),
