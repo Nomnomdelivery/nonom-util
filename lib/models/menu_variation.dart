@@ -28,6 +28,21 @@ class MenuVariation {
     "photo_url": photoUrl,
   };
 
+  // Used to apply a refreshed price onto an existing variant without losing its other fields.
+  MenuVariation copyWith({
+    int? id,
+    String? name,
+    double? price,
+    String? photoUrl,
+    bool? isActive,
+  }) => MenuVariation(
+    id: id ?? this.id,
+    name: name ?? this.name,
+    price: price ?? this.price,
+    photoUrl: photoUrl ?? this.photoUrl,
+    isActive: isActive ?? this.isActive,
+  );
+
   @override
   String toString() => "${toJson()}";
 }
