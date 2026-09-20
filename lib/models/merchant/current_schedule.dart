@@ -33,22 +33,28 @@ class CurrentSchedule {
     required this.isOpen,
   });
 
+  // Falls back to safe defaults when the backend sends an empty/partial
+  // schedule (e.g. `current_schedule: {}` for a merchant with no schedule set).
   factory CurrentSchedule.fromJson(Map<String, dynamic> json) {
     return CurrentSchedule(
-      id: json['id'],
-      merchantId: json['merchant_id'],
-      startTime: json['start_time'],
-      endTime: json['end_time'],
-      day: json['day'],
-      createdAt: DateTime.parse(json['created_at']),
-      updatedAt: DateTime.parse(json['updated_at']),
+      id: json['id'] ?? 0,
+      merchantId: json['merchant_id'] ?? 0,
+      startTime: json['start_time'] ?? '00:00:00',
+      endTime: json['end_time'] ?? '00:00:00',
+      day: json['day'] ?? 0,
+      createdAt: json['created_at'] == null
+          ? DateTime.now()
+          : DateTime.parse(json['created_at']),
+      updatedAt: json['updated_at'] == null
+          ? DateTime.now()
+          : DateTime.parse(json['updated_at']),
       enable: json['enable'] == 1,
-      label: json['label'],
-      order: json['order'],
+      label: json['label'] ?? '',
+      order: json['order'] ?? 0,
       text: json['text'] ?? '',
-      opening: json['opening'],
-      start: json['start'],
-      end: json['end'],
+      opening: json['opening'] ?? '',
+      start: json['start'] ?? '00:00:00',
+      end: json['end'] ?? '00:00:00',
       isOpen: json['is_open'] == 1,
     );
   }
