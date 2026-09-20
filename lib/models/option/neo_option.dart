@@ -60,7 +60,8 @@ class NeoOption {
       id: json['id'],
       optionCategoryId: json['option_category_id'],
       name: json['name'],
-      image: json['photo_url'].toString(),
+      // photo_url is nullable server-side; avoid stringifying null to "null".
+      image: json['photo_url']?.toString() ?? '',
       availability: int.parse(json['availability'].toString()),
       createdAt: DateTime.parse(json['created_at']),
       updatedAt: DateTime.parse(json['updated_at']),

@@ -415,11 +415,14 @@ class _OptionItem extends StatelessWidget {
                       borderRadius: BorderRadius.circular(17),
                       child: CachedNetworkImage(
                         imageUrl:
-                            option.image.contains("placeholder") ||
+                            option.image.isEmpty ||
+                                option.image.contains("placeholder") ||
                                 option.image.contains("no_image")
                             ? placeholderImage
                             : option.image,
                         fit: BoxFit.cover,
+                        errorWidget: (_, _, _) =>
+                            const Icon(Icons.broken_image_outlined),
                       ),
                     ),
                   ),

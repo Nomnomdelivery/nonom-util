@@ -580,13 +580,9 @@ class _MenuDetailsState extends ConsumerState<MenuDetails> with ColorPalette {
                                     tag:
                                         "${widget.item.id}${widget.item.photoUrl}",
                                     child: CachedNetworkImage(
-                                      imageUrl: selectedVariant == null
-                                          ? widget.item.photoUrl
-                                          : selectedVariant!.photoUrl.contains(
-                                              "placeholder",
-                                            )
-                                          ? widget.item.photoUrl
-                                          : selectedVariant!.photoUrl,
+                                      // Main photo always reflects the menu item itself, never a
+                                      // selected variant/option's photo.
+                                      imageUrl: widget.item.photoUrl,
                                       fit: BoxFit.cover,
                                       errorWidget: (context, url, error) =>
                                           Image.asset(

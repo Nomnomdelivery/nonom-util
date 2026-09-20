@@ -13,11 +13,11 @@ class MenuVariation {
   });
 
   factory MenuVariation.fromJson(Map<String, dynamic> json) => MenuVariation(
-    id: json['id'],
+    id: json['id'] ?? 0,
     isActive: json['is_active'] == 1,
-    name: json['name'],
-    photoUrl: json['photo_url'],
-    price: double.parse(json['price'].toString()),
+    name: json['name'] ?? "",
+    photoUrl: json['photo_url'] ?? "",
+    price: double.parse((json['price'] ?? 0).toString()),
   );
 
   Map<String, dynamic> toJson() => {
