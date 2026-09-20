@@ -55,7 +55,12 @@ class NeoOption {
     final List subOptions = json['sub_options'] ?? [];
 
     return NeoOption(
-      price: double.tryParse(json['price'].toString()) ?? 0,
+      // Backend returns the option's price under base_price (see SubOption),
+      // falling back to price for older payload shapes.
+      price:
+          double.tryParse(json['base_price'].toString()) ??
+          double.tryParse(json['price'].toString()) ??
+          0,
       groupName: json['group_name'],
       id: json['id'],
       optionCategoryId: json['option_category_id'],
