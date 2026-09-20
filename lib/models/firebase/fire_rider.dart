@@ -18,7 +18,9 @@ class FireRider {
     fullname: json['fullname'],
     phoneNumber: json['phone_number'],
     id: json['id'],
-    photoUrl: json['photo_url'],
+    // photo_url can be null in Firestore (e.g. rider hasn't set one); fall back to empty
+    // string to avoid a null-cast crash that used to break the whole order stream.
+    photoUrl: json['photo_url'] ?? '',
   );
 
   Map<String, dynamic> toJson() => {
